@@ -4,7 +4,7 @@ This repo provides a single pipeline with which Henry's constants and other prop
 
 **Before running the code, modify line # 164 and # 165 where the regression model and its hyperparamter grid should be defined, respectively.**
 
-After setting a model and corresponding hyperparameter candidates, type the following:
+After setting a model and corresponding hyperparameter candidates, type the following command on Terminal:  
 `python pipeline.py set_1.csv set_2.csv`
 
 Resulting files consist of:
