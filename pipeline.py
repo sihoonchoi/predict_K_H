@@ -8,6 +8,7 @@ import warnings
 warnings.simplefilter('ignore')
 
 from sklearn.kernel_ridge import KernelRidge
+from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import GridSearchCV, PredefinedSplit
@@ -92,9 +93,12 @@ def get_selectivity(mol1, mol2, X, actual, predict):
 
         return selectivity
 
-def train_model(model, param_grid, X_train, X_test, y_train, y_test, compare = 'K'):
+def train_model(X_train, X_test, y_train, y_test, compare = 'K'):
     print('Training on {} prediction\n'.format(compare))
     
+    model = GradientBoostingRegressor(loss = 'ls')
+    param_grid = {'n_estimators': np.array([100, 500, 1000, 5000]), 'max_depth': np.array([2, 3, 4, 5]), 'learning_rate': np.logspace(-4, -1, 4)}
+
     X_train_shuffle, y_train_shuffle = shuffle(X_train, y_train)
     gcv = GridSearchCV(model, param_grid, cv = 3, n_jobs = -1, verbose = 1)
     gcv.fit(X_train_shuffle, y_train_shuffle)
@@ -153,11 +157,8 @@ h_test = test.H
 h_valid = valid.H
 
 # predict the Henry's constants
-scaler = MinMaxScaler(feature_range = (0, 1))
-krr = KernelRidge(kernel = 'rbf')
-model = Pipeline(steps = [('scaler', scaler), ('krr', krr)])
-param_grid = {'krr__alpha': np.logspace(-4, -3, 5), 'krr__gamma': np.logspace(-2, -1, 5)}
-best_model = train_model(model, param_grid, train[all_des], test[all_des], k_train, k_test)
+
+best_model = train_model(train[all_des], test[all_des], k_train, k_test)
 
 k_train_predict = pd.Series(best_model.predict(train[all_des]), index = k_train.index)
 k_test_predict = pd.Series(best_model.predict(test[all_des]), index = k_test.index)
@@ -185,7 +186,7 @@ for pair in azeo_pairs:
 csv.close()
 
 # predict the heats of adsorption
-best_model_H = train_model(model, param_grid, train[all_des], test[all_des], h_train, h_test, compare = 'H')
+best_model_H = train_model(train[all_des], test[all_des], h_train, h_test, compare = 'H')
 
 h_train_predict = pd.Series(best_model_H.predict(train[all_des]), index = h_train.index)
 h_test_predict = pd.Series(best_model_H.predict(test[all_des]), index = h_test.index)
