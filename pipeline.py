@@ -8,6 +8,7 @@ import warnings
 warnings.simplefilter('ignore')
 
 from sklearn.kernel_ridge import KernelRidge
+from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import GridSearchCV, PredefinedSplit
 from sklearn.metrics import r2_score, mean_absolute_error, max_error
@@ -34,8 +35,8 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
         ylabel = 'Predicted $\Delta H_{ads}$ [kJ/mol]'
         scale = 'linear'
 
-        space = np.array([-25, 150])
-        ticks = np.linspace(0, 150, 4)
+        space = np.array([-300, 150])
+        ticks = np.linspace(-250, 100, 8)
 
         axes.scatter(actual, predict, marker =  '.', alpha = .4)
 
@@ -44,10 +45,8 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
         ylabel = 'Predicted Selectivity'
         scale = 'log'
 
-        space_min = np.floor(min(actual.min(), predict.min()))
-        space_max = np.ceil(max(actual.max(), predict.max()))
-        space = np.array([10.**space_min, 10.**space_max])
-        ticks = np.logspace(-60, 10, 8)
+        space = np.array([1e-10, 1e10])
+        ticks = np.logspace(-10, 10, 5)
 
         axes.scatter(10.**actual, 10.**predict, marker = '.', alpha = .4)
 
@@ -95,17 +94,10 @@ def get_selectivity(mol1, mol2, X, actual, predict):
 
 def train_model(model, param_grid, X_train, X_test, y_train, y_test, compare = 'K'):
     print('Training on {} prediction\n'.format(compare))
-
-    X = np.append(X_train, X_test, axis = 0)
-    y = y_train.append(y_test)
-
-    test_fold = np.zeros(X.shape[0])
-    test_fold[:X_train.shape[0]] = -1
-    ps = PredefinedSplit(test_fold)
     
-    gcv = GridSearchCV(model, param_grid, cv = ps.split(), n_jobs = -1, verbose = 1)
-
-    gcv.fit(X, y)
+    X_train_shuffle, y_train_shuffle = shuffle(X_train, y_train)
+    gcv = GridSearchCV(model, param_grid, cv = 3, n_jobs = -1, verbose = 1)
+    gcv.fit(X_train_shuffle, y_train_shuffle)
     best_model = gcv.best_estimator_
 
     print('Optimal hyperparameters: {}'.format(gcv.best_params_))
@@ -161,8 +153,10 @@ h_test = test.H
 h_valid = valid.H
 
 # predict the Henry's constants
-model = KernelRidge(kernel = 'rbf') # change this part
-param_grid = {'alpha': np.logspace(-1, 1, 5), 'gamma': np.logspace(-2, 0, 5)}
+scaler = MinMaxScaler(feature_range = (0, 1))
+krr = KernelRidge(kernel = 'rbf')
+model = Pipeline(steps = [('scaler', scaler), ('krr', krr)])
+param_grid = {'krr__alpha': np.logspace(-4, -3, 5), 'krr__gamma': np.logspace(-2, -1, 5)}
 best_model = train_model(model, param_grid, train[all_des], test[all_des], k_train, k_test)
 
 k_train_predict = pd.Series(best_model.predict(train[all_des]), index = k_train.index)
@@ -207,10 +201,10 @@ parity_plot(h_valid, h_valid_predict, title = 'Validation Set', compare = 'H')
 print('Training Set')
 print('MAE: {}'.format(mean_absolute_error(h_train, h_train_predict)))
 print('Max: {}\n'.format(max_error(h_train, h_train_predict)))
-print('Test Set\n')
+print('Test Set')
 print('MAE: {}'.format(mean_absolute_error(h_test, h_test_predict)))
 print('Max: {}\n'.format(max_error(h_test, h_test_predict)))
-print('Validation Set\n')
+print('Validation Set')
 print('MAE: {}'.format(mean_absolute_error(h_valid, h_valid_predict)))
 print('Max: {}\n'.format(max_error(h_valid, h_valid_predict)))
 
