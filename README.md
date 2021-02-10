@@ -9,7 +9,7 @@ After setting a model and corresponding hyperparameter candidates, type the foll
 
 Resulting files consist of:
 - Parity plots of K regression for train/test/validation set
-- Parity plots of selectivities prediction for near-azeotropic pairs in the validation set
-- A CSV file of Spearman's coefficients of predicted selectivities for near-azeotropic pairs in the validation set
+- Parity plots of selectivities prediction for 3 near-azeotropic pairs in the validation set
+- A CSV file of Spearman's coefficients of predicted selectivities for 3 near-azeotropic pairs in the validation set
 - Parity plots of H regression for train/test/validation set
-- A CSV file of Spearman's coefficients of calculated selectivities at 373 K for near-azeotropic pairs in the validation set
+- A CSV file of Spearman's coefficients of calculated selectivities at 373 K for 3 near-azeotropic pairs in the validation set
