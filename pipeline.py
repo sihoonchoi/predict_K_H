@@ -97,7 +97,7 @@ def train_model(X_train, X_test, y_train, y_test, compare = 'K'):
     print('Training on {} prediction\n'.format(compare))
     
     model = GradientBoostingRegressor(loss = 'ls')
-    param_grid = {'n_estimators': np.array([100, 500, 1000, 5000]), 'max_depth': np.array([2, 3, 4, 5]), 'learning_rate': np.logspace(-4, -1, 4)}
+    param_grid = {'n_estimators': np.array([50, 100, 500, 1000]), 'max_depth': np.array([2, 3, 4]), 'learning_rate': np.logspace(-4, -1, 4)}
 
     X_train_shuffle, y_train_shuffle = shuffle(X_train, y_train)
     gcv = GridSearchCV(model, param_grid, cv = 3, n_jobs = -1, verbose = 1)
