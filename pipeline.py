@@ -255,6 +255,37 @@ for pair in azeo_pairs_valid:
 csv.close()
 
 # calculate the selectivity at 373K
+## training set
+k_train_373 = henry_at_diff_temp(k_train, h_train, 300, 373)
+k_train_predict_373 = henry_at_diff_temp(k_train_predict, h_train_predict, 300, 373)
+
+csv_373 = open('CSVs/spearman_373_train.csv', 'w')
+csv_373.write('mol1,mol2,spearman\n')
+
+for pair in azeo_pairs_train_test:
+    mol1, mol2 = pair
+    selectivity_373 = get_selectivity(mol1, mol2, train, k_train_373, k_train_predict_373)
+    parity_plot(selectivity_373.simulation, selectivity_373.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/train/373', compare = 'selectivity')
+    csv_373.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
+
+csv_373.close()
+
+## test set
+k_test_373 = henry_at_diff_temp(k_test, h_test, 300, 373)
+k_test_predict_373 = henry_at_diff_temp(k_test_predict, h_test_predict, 300, 373)
+
+csv_373 = open('CSVs/spearman_373_test.csv', 'w')
+csv_373.write('mol1,mol2,spearman\n')
+
+for pair in azeo_pairs_train_test:
+    mol1, mol2 = pair
+    selectivity_373 = get_selectivity(mol1, mol2, test, k_test_373, k_test_predict_373)
+    parity_plot(selectivity_373.simulation, selectivity_373.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/test/373', compare = 'selectivity')
+    csv_373.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
+
+csv_373.close()
+
+## validation set
 k_valid_373 = henry_at_diff_temp(k_valid, h_valid, 300, 373)
 k_valid_predict_373 = henry_at_diff_temp(k_valid_predict, h_valid_predict, 300, 373)
 
