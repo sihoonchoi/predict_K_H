@@ -1,0 +1,11 @@
+mol1,mol2,spearman
+propene,propane,0.3064935064935065
+acetonitrile,isopropyl alcohol,0.8430265386787127
+propyl alcohol,methyl propyl ketone,0.8452012383900928
+dimethylamine,acetaldehyde,0.03823529411764706
+acetaldehyde,ethylamine,0.6305469556243549
+1,5-heptadiene,propionitrile,0.8571428571428571
+dimethylamine,ethylamine,0.056372549019607844
+methyl propyl ether,2-pentene,0.6147058823529412
+neopentane,methyl isopropyl ether,0.6904024767801857
+4-methyl-1-hexene,4,4-dimethyl-1-pentene,0.5868131868131868

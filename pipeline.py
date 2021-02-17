@@ -65,6 +65,9 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
 
     plt.tight_layout()
 
+    if not os.path.isdir(dirname):
+        os.makedirs(dirname)
+
     plt.savefig('{}/{}_{}.png'.format(dirname, title, compare))
     plt.close()
 
@@ -96,14 +99,14 @@ def get_selectivity(mol1, mol2, X, actual, predict):
 def train_model(X_train, X_test, y_train, y_test, compare = 'K'):
     print('Training on {} prediction\n'.format(compare))
     
-    model = GradientBoostingRegressor(loss = 'ls')
-    param_grid = {'n_estimators': np.array([50, 100, 500, 1000]), 'max_depth': np.array([2, 3, 4]), 'learning_rate': np.logspace(-4, -1, 4)}
+    model = GradientBoostingRegressor(max_depth = 3, learning_rate = 0.1)
+    param_grid = {'n_estimators': np.array([5000]), 'loss': ['ls']}
 
     X_train_shuffle, y_train_shuffle = shuffle(X_train, y_train)
     gcv = GridSearchCV(model, param_grid, cv = 3, n_jobs = -1, verbose = 1)
     gcv.fit(X_train_shuffle, y_train_shuffle)
     best_model = gcv.best_estimator_
-
+        
     print('Optimal hyperparameters: {}'.format(gcv.best_params_))
     print('r2 of {} prediction for the training set: {}'.format(compare, best_model.score(X_train, y_train)))
     print('r2 of {} prediction for the test set: {}'.format(compare, best_model.score(X_test, y_test)))
@@ -171,20 +174,6 @@ k_valid_predict = pd.Series(best_model.predict(valid[all_des]), index = k_valid.
 print('r2 of K prediction for the validation set: {}\n'.format(best_model.score(valid[all_des], k_valid)))
 parity_plot(k_valid, k_valid_predict, title = 'Validation Set')
 
-# analyze the near-azeotropic pairs
-azeo_pairs = [('1-methyl-3-buten-1-ol', '3-methyl-1-butanol'), ('2-hexene', '1,5-hexadiene'), ('propionaldehyde', 'propylamine')]
-
-csv = open('CSVs/spearman.csv', 'w')
-csv.write('mol1,mol2,spearman\n')
-
-for pair in azeo_pairs:
-    mol1, mol2 = pair
-    selectivity = get_selectivity(mol1, mol2, valid, k_valid, k_valid_predict)
-    parity_plot(selectivity.simulation, selectivity.ML, title = '{} - {}'.format(mol1, mol2), compare = 'selectivity')
-    csv.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
-
-csv.close()
-
 # predict the heats of adsorption
 best_model_H = train_model(train[all_des], test[all_des], h_train, h_test, compare = 'H')
 
@@ -209,17 +198,73 @@ print('Validation Set')
 print('MAE: {}'.format(mean_absolute_error(h_valid, h_valid_predict)))
 print('Max: {}\n'.format(max_error(h_valid, h_valid_predict)))
 
+# analyze the near-azeotropic pairs
+## training set
+azeo_pairs_train_test = [
+    ('propene', 'propane'),
+    ('acetonitrile', 'isopropyl alcohol'),
+    ('propyl alcohol', 'methyl propyl ketone'),
+    ('dimethylamine', 'acetaldehyde'),
+    ('acetaldehyde', 'ethylamine'),
+    ('1,5-heptadiene', 'propionitrile'),
+    ('dimethylamine', 'ethylamine'),
+    ('methyl propyl ether', '2-pentene'),
+    ('neopentane', 'methyl isopropyl ether'),
+    ('4-methyl-1-hexene', '4,4-dimethyl-1-pentene')
+    ]
+
+csv = open('CSVs/spearman_train.csv', 'w')
+csv.write('mol1,mol2,spearman\n')
+
+for pair in azeo_pairs_train_test:
+    mol1, mol2 = pair
+    selectivity = get_selectivity(mol1, mol2, train, k_train, k_train_predict)
+    parity_plot(selectivity.simulation, selectivity.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/train/300', compare = 'selectivity')
+    csv.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
+
+csv.close()
+
+## test set
+csv = open('CSVs/spearman_test.csv', 'w')
+csv.write('mol1,mol2,spearman\n')
+
+for pair in azeo_pairs_train_test:
+    mol1, mol2 = pair
+    selectivity = get_selectivity(mol1, mol2, test, k_test, k_test_predict)
+    parity_plot(selectivity.simulation, selectivity.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/test/300', compare = 'selectivity')
+    csv.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
+
+csv.close()
+
+## validation set
+azeo_pairs_valid = [
+    ('1-methyl-3-buten-1-ol', '3-methyl-1-butanol'),
+    ('2-hexene', '1,5-hexadiene'),
+    ('propionaldehyde', 'propylamine')
+    ]
+
+csv = open('CSVs/spearman_valid.csv', 'w')
+csv.write('mol1,mol2,spearman\n')
+
+for pair in azeo_pairs_valid:
+    mol1, mol2 = pair
+    selectivity = get_selectivity(mol1, mol2, valid, k_valid, k_valid_predict)
+    parity_plot(selectivity.simulation, selectivity.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/validation/300', compare = 'selectivity')
+    csv.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
+
+csv.close()
+
 # calculate the selectivity at 373K
 k_valid_373 = henry_at_diff_temp(k_valid, h_valid, 300, 373)
 k_valid_predict_373 = henry_at_diff_temp(k_valid_predict, h_valid_predict, 300, 373)
 
-csv_373 = open('CSVs/spearman_373.csv', 'w')
+csv_373 = open('CSVs/spearman_373_valid.csv', 'w')
 csv_373.write('mol1,mol2,spearman\n')
 
-for pair in azeo_pairs:
+for pair in azeo_pairs_valid:
     mol1, mol2 = pair
     selectivity_373 = get_selectivity(mol1, mol2, valid, k_valid_373, k_valid_predict_373)
-    parity_plot(selectivity_373.simulation, selectivity_373.ML, title = '{} - {} at 373K'.format(mol1, mol2), compare = 'selectivity')
+    parity_plot(selectivity_373.simulation, selectivity_373.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/validation/373', compare = 'selectivity')
     csv_373.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
 
 csv_373.close()
