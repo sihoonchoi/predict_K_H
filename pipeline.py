@@ -320,11 +320,22 @@ for mol in molecules_valid:
 tsv_mol.close()
 
 # save predicted values
+## Henry's constants
 k_train_together = train[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_train_predict, columns = ['K_predict']))
-k_train_together.to_csv('TSVs/{}.tsv'.format('training'), sep = '\t', index = False)
+k_train_together.to_csv('TSVs/{}.tsv'.format('K_training'), sep = '\t', index = False)
 
 k_test_together = test[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_test_predict, columns = ['K_predict']))
-k_test_together.to_csv('TSVs/{}.tsv'.format('test'), sep = '\t', index = False)
+k_test_together.to_csv('TSVs/{}.tsv'.format('K_test'), sep = '\t', index = False)
 
 k_valid_together = valid[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_valid_predict, columns = ['K_predict']))
-k_valid_together.to_csv('TSVs/{}.tsv'.format('validation'), sep = '\t', index = False)
+k_valid_together.to_csv('TSVs/{}.tsv'.format('K_validation'), sep = '\t', index = False)
+
+## heats of adsorption
+h_train_together = train[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_train_predict, columns = ['H_predict']))
+h_train_together.to_csv('TSVs/{}.tsv'.format('H_training'), sep = '\t', index = False)
+
+h_test_together = test[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_test_predict, columns = ['H_predict']))
+h_test_together.to_csv('TSVs/{}.tsv'.format('H_test'), sep = '\t', index = False)
+
+h_valid_together = valid[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_valid_predict, columns = ['H_valid']))
+h_valid_together.to_csv('TSVs/{}.tsv'.format('H_valid'), sep = '\t', index = False)
