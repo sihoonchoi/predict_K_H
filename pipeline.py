@@ -7,15 +7,13 @@ import sys
 import warnings
 warnings.simplefilter('ignore')
 
-from sklearn.kernel_ridge import KernelRidge
 from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
-from sklearn.model_selection import GridSearchCV, PredefinedSplit
+from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import r2_score, mean_absolute_error, max_error
 from sklearn.utils import shuffle
 from scipy.stats import spearmanr
-from itertools import combinations
 
 # define functions
 def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
@@ -125,9 +123,9 @@ if not os.path.isdir(figure):
     os.makedirs(figure)
 
 # make a directory to save CSVs
-CSV = 'CSVs'
-if not os.path.isdir(CSV):
-    os.makedirs(CSV)
+TSV = 'TSVs'
+if not os.path.isdir(TSV):
+    os.makedirs(TSV)
 
 # data organizing
 train_test = pd.read_csv(sys.argv[1])
@@ -213,28 +211,28 @@ azeo_pairs_train_test = [
     ('4-methyl-1-hexene', '4,4-dimethyl-1-pentene')
     ]
 
-csv = open('CSVs/spearman_train.csv', 'w')
-csv.write('mol1,mol2,spearman\n')
+tsv = open('TSVs/spearman_train.tsv', 'w')
+tsv.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_train_test:
     mol1, mol2 = pair
     selectivity = get_selectivity(mol1, mol2, train, k_train, k_train_predict)
     parity_plot(selectivity.simulation, selectivity.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/train/300', compare = 'selectivity')
-    csv.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
+    tsv.write('{}\t{}\t{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
 
-csv.close()
+tsv.close()
 
 ## test set
-csv = open('CSVs/spearman_test.csv', 'w')
-csv.write('mol1,mol2,spearman\n')
+tsv = open('TSVs/spearman_test.tsv', 'w')
+tsv.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_train_test:
     mol1, mol2 = pair
     selectivity = get_selectivity(mol1, mol2, test, k_test, k_test_predict)
     parity_plot(selectivity.simulation, selectivity.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/test/300', compare = 'selectivity')
-    csv.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
+    tsv.write('{}\t{}\t{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
 
-csv.close()
+tsv.close()
 
 ## validation set
 azeo_pairs_valid = [
@@ -243,59 +241,90 @@ azeo_pairs_valid = [
     ('propionaldehyde', 'propylamine')
     ]
 
-csv = open('CSVs/spearman_valid.csv', 'w')
-csv.write('mol1,mol2,spearman\n')
+tsv = open('TSVs/spearman_valid.tsv', 'w')
+tsv.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_valid:
     mol1, mol2 = pair
     selectivity = get_selectivity(mol1, mol2, valid, k_valid, k_valid_predict)
     parity_plot(selectivity.simulation, selectivity.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/validation/300', compare = 'selectivity')
-    csv.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
+    tsv.write('{}\t{}\t{}\n'.format(mol1, mol2, spearmanr(selectivity.simulation, selectivity.ML)[0]))
 
-csv.close()
+tsv.close()
 
 # calculate the selectivity at 373K
 ## training set
 k_train_373 = henry_at_diff_temp(k_train, h_train, 300, 373)
 k_train_predict_373 = henry_at_diff_temp(k_train_predict, h_train_predict, 300, 373)
 
-csv_373 = open('CSVs/spearman_373_train.csv', 'w')
-csv_373.write('mol1,mol2,spearman\n')
+tsv_373 = open('TSVs/spearman_373_train.tsv', 'w')
+tsv_373.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_train_test:
     mol1, mol2 = pair
     selectivity_373 = get_selectivity(mol1, mol2, train, k_train_373, k_train_predict_373)
     parity_plot(selectivity_373.simulation, selectivity_373.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/train/373', compare = 'selectivity')
-    csv_373.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
+    tsv_373.write('{}\t{}\t{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
 
-csv_373.close()
+tsv_373.close()
 
 ## test set
 k_test_373 = henry_at_diff_temp(k_test, h_test, 300, 373)
 k_test_predict_373 = henry_at_diff_temp(k_test_predict, h_test_predict, 300, 373)
 
-csv_373 = open('CSVs/spearman_373_test.csv', 'w')
-csv_373.write('mol1,mol2,spearman\n')
+tsv_373 = open('TSVs/spearman_373_test.tsv', 'w')
+tsv_373.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_train_test:
     mol1, mol2 = pair
     selectivity_373 = get_selectivity(mol1, mol2, test, k_test_373, k_test_predict_373)
     parity_plot(selectivity_373.simulation, selectivity_373.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/test/373', compare = 'selectivity')
-    csv_373.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
+    tsv_373.write('{}\t{}\t{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
 
-csv_373.close()
+tsv_373.close()
 
 ## validation set
 k_valid_373 = henry_at_diff_temp(k_valid, h_valid, 300, 373)
 k_valid_predict_373 = henry_at_diff_temp(k_valid_predict, h_valid_predict, 300, 373)
 
-csv_373 = open('CSVs/spearman_373_valid.csv', 'w')
-csv_373.write('mol1,mol2,spearman\n')
+tsv_373 = open('TSVs/spearman_373_valid.tsv', 'w')
+tsv_373.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_valid:
     mol1, mol2 = pair
     selectivity_373 = get_selectivity(mol1, mol2, valid, k_valid_373, k_valid_predict_373)
     parity_plot(selectivity_373.simulation, selectivity_373.ML, title = '{} - {}'.format(mol1, mol2), dirname = 'figures/validation/373', compare = 'selectivity')
-    csv_373.write('{},{},{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
+    tsv_373.write('{}\t{}\t{}\n'.format(mol1, mol2, spearmanr(selectivity_373.simulation, selectivity_373.ML)[0]))
 
-csv_373.close()
+tsv_373.close()
+
+# r2 on molecule
+## test set
+tsv_mol = open('TSVs/r2_test.tsv', 'w')
+tsv_mol.write('molecule\tr2\n')
+
+for mol in molecules_train_test:
+    parity_plot(k_test.loc[test.molecule == mol], k_test_predict.loc[test.molecule == mol], title = '{}'.format(mol), dirname = 'figures/test/molecules', compare = 'K')
+    tsv_mol.write('{}\t{}\n'.format(mol, r2_score(k_test.loc[test.molecule == mol], k_test_predict.loc[test.molecule == mol])))
+
+tsv_mol.close()
+
+## validation set
+tsv_mol = open('TSVs/r2_validation.tsv', 'w')
+tsv_mol.write('molecule\tr2\n')
+
+for mol in molecules_valid:
+    parity_plot(k_valid.loc[valid.molecule == mol], k_valid_predict.loc[valid.molecule == mol], title = '{}'.format(mol), dirname = 'figures/validation/molecules', compare = 'K')
+    tsv_mol.write('{}\t{}\n'.format(mol, r2_score(k_valid.loc[valid.molecule == mol], k_valid_predict.loc[valid.molecule == mol])))
+
+tsv_mol.close()
+
+# save predicted values
+k_train_together = train[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_train_predict, columns = ['K_predict']))
+k_train_together.to_csv('TSVs/{}.tsv'.format('training'), sep = '\t', index = False)
+
+k_test_together = test[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_test_predict, columns = ['K_predict']))
+k_test_together.to_csv('TSVs/{}.tsv'.format('test'), sep = '\t', index = False)
+
+k_valid_together = valid[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_valid_predict, columns = ['K_predict']))
+k_valid_together.to_csv('TSVs/{}.tsv'.format('validation'), sep = '\t', index = False)

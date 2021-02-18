@@ -2146,3 +2146,247 @@ Nodes:
 atl1-1-01-016-36-l.pace.gatech.edu
 End PBS Epilogue Wed Feb 17 12:32:02 EST 2021
 ---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 17 13:00:48 EST 2021
+Job ID:     6613519.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 17 13:00:48 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+---------------------------------------
+Begin PBS Epilogue Wed Feb 17 13:13:50 EST 2021
+Job ID:     6613519.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=00:27:03,vmem=4775448kb,walltime=00:13:02,mem=568744kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-017-37-l.pace.gatech.edu
+End PBS Epilogue Wed Feb 17 13:13:50 EST 2021
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 17 13:14:43 EST 2021
+Job ID:     6613527.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 17 13:14:43 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of K prediction for the training set: 0.9895273338404778
+r2 of K prediction for the test set: 0.8327288372006041
+r2 of K prediction for the validation set: 0.8304433100452622
+
+Training on H prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  7.0min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of H prediction for the training set: 0.9867061519000332
+r2 of H prediction for the test set: 0.8275111759127325
+r2 of H prediction for the validation set: 0.8258412134874297
+
+Training Set
+MAE: 1.692709556621449
+Max: 22.697819753500266
+
+Test Set
+MAE: 4.070589839250282
+Max: 216.8679976330847
+
+Validation Set
+MAE: 5.580896646711049
+Max: 212.75496524285657
+
+Traceback (most recent call last):
+  File "pipeline.py", line 308, in <module>
+    csv_mol.write('{},{}\n'.format(mol, r2_score(k_test.loc[test.molecule == mol], k_test_predict.loc[test_molecule == mol])))
+NameError: name 'test_molecule' is not defined
+---------------------------------------
+Begin PBS Epilogue Wed Feb 17 13:48:59 EST 2021
+Job ID:     6613527.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=01:02:01,vmem=5339964kb,walltime=00:34:16,mem=591088kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-017-37-l.pace.gatech.edu
+End PBS Epilogue Wed Feb 17 13:48:59 EST 2021
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 17 15:17:06 EST 2021
+Job ID:     6615105.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 17 15:17:06 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of K prediction for the training set: 0.9895273338404778
+r2 of K prediction for the test set: 0.8326929639756164
+r2 of K prediction for the validation set: 0.8274116944690876
+
+Training on H prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of H prediction for the training set: 0.9867061519000332
+r2 of H prediction for the test set: 0.8260612171682898
+r2 of H prediction for the validation set: 0.8220985644947119
+
+Training Set
+MAE: 1.6927095566214483
+Max: 22.697819753500223
+
+Test Set
+MAE: 4.082778304956935
+Max: 216.86799763308474
+
+Validation Set
+MAE: 5.754921052677032
+Max: 212.6330177796724
+
+Traceback (most recent call last):
+  File "pipeline.py", line 323, in <module>
+    k_train_together = train[['MOF', 'molecule', 'K']].join(k_train_predict)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/pandas/core/frame.py", line 7209, in join
+    other, on=on, how=how, lsuffix=lsuffix, rsuffix=rsuffix, sort=sort
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/pandas/core/frame.py", line 7220, in _join_compat
+    raise ValueError("Other Series must have a name")
+ValueError: Other Series must have a name
+---------------------------------------
+Begin PBS Epilogue Wed Feb 17 15:51:21 EST 2021
+Job ID:     6615105.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=01:01:51,vmem=5339728kb,walltime=00:34:15,mem=590868kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-015-31-r.pace.gatech.edu
+End PBS Epilogue Wed Feb 17 15:51:21 EST 2021
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 17 16:36:58 EST 2021
+Job ID:     6615116.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 17 16:36:58 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of K prediction for the training set: 0.9895273338404778
+r2 of K prediction for the test set: 0.8253248474638109
+r2 of K prediction for the validation set: 0.8307332302066166
+
+Training on H prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of H prediction for the training set: 0.9867061519000332
+r2 of H prediction for the test set: 0.8269321040783935
+r2 of H prediction for the validation set: 0.8245542841812021
+
+Training Set
+MAE: 1.6927095566214476
+Max: 22.697819753500205
+
+Test Set
+MAE: 4.076570387401699
+Max: 216.8679976330847
+
+Validation Set
+MAE: 5.667240635548619
+Max: 212.846878414217
+
+---------------------------------------
+Begin PBS Epilogue Wed Feb 17 17:11:17 EST 2021
+Job ID:     6615116.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=01:01:57,vmem=5339952kb,walltime=00:34:19,mem=590940kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-016-31-r.pace.gatech.edu
+End PBS Epilogue Wed Feb 17 17:11:17 EST 2021
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 17 23:44:04 EST 2021
+Job ID:     6615452.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 17 23:44:04 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of K prediction for the training set: 0.9895273338404778
+r2 of K prediction for the test set: 0.8327339960503812
+r2 of K prediction for the validation set: 0.8311021848801007
+
+Training on H prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  7.0min finished
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of H prediction for the training set: 0.9867061519000332
+r2 of H prediction for the test set: 0.8243323660478625
+r2 of H prediction for the validation set: 0.8259462541504927
+
+Training Set
+MAE: 1.6927095566214472
+Max: 22.69781975350019
+
+Test Set
+MAE: 4.095471707239389
+Max: 216.8679976330848
+
+Validation Set
+MAE: 5.509727219611856
+Max: 213.1841820742101
+
+---------------------------------------
+Begin PBS Epilogue Thu Feb 18 00:18:51 EST 2021
+Job ID:     6615452.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=01:02:38,vmem=5341276kb,walltime=00:34:47,mem=592300kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-013-27-r.pace.gatech.edu
+End PBS Epilogue Thu Feb 18 00:18:51 EST 2021
+---------------------------------------
