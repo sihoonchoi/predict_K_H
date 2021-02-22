@@ -20,28 +20,28 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
     fig, axes = plt.subplots(1, 1, figsize = (5, 4.5), dpi = 150)
     
     if compare == 'K':
-        xlabel = 'Actual $K_H$ [mol/kg/Pa]'
-        ylabel = 'Predicted $K_H$ [mol/kg/Pa]'
+        xlabel = 'GCMC simulated $K_H$ [mol/kg/Pa]'
+        ylabel = 'ML predicted $K_H$ [mol/kg/Pa]'
         scale = 'log'
 
-        space = np.array([1e-62, 1e12])
-        ticks = np.logspace(-60, 10, 8)
+        space = np.array([1e-22, 1e12])
+        ticks = np.logspace(-20, 10, 7)
 
         axes.scatter(10.**actual, 10.**predict, marker =  '.', alpha = .4)
         
     elif compare == 'H':
-        xlabel = 'Actual $\Delta H_{ads}$ [kJ/mol]'
-        ylabel = 'Predicted $\Delta H_{ads}$ [kJ/mol]'
+        xlabel = 'GCMC simulated $\Delta H_{ads}$ [kJ/mol]'
+        ylabel = 'ML predicted $\Delta H_{ads}$ [kJ/mol]'
         scale = 'linear'
 
-        space = np.array([-300, 150])
-        ticks = np.linspace(-250, 100, 8)
+        space = np.array([-50, 150])
+        ticks = np.linspace(-50, 150, 5)
 
         axes.scatter(actual, predict, marker =  '.', alpha = .4)
 
     elif compare == 'selectivity':
-        xlabel = 'Actual Selectivity'
-        ylabel = 'Predicted Selectivity'
+        xlabel = 'GCMC simulated selectivity'
+        ylabel = 'ML predicted selectivity'
         scale = 'log'
 
         space = np.array([1e-10, 1e10])
@@ -144,8 +144,8 @@ molecules_valid = set(valid.molecule)
 # descriptors
 text = train_test.columns[2:5]
 pes = train_test.columns[5:33]
-aprdf = train_test.columns[33:69]
-mol = train_test.columns[69:137]
+aprdf = train_test.columns[33:101]
+mol = train_test.columns[101:137]
 all_des = train_test.columns[2:137]
 
 # properties of interest
