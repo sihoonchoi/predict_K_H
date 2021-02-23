@@ -24,8 +24,8 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
         ylabel = 'ML predicted $K_H$ [mol/kg/Pa]'
         scale = 'log'
 
-        space = np.array([1e-22, 1e12])
-        ticks = np.logspace(-20, 10, 7)
+        space = np.array([1e-62, 1e12])
+        ticks = np.logspace(-60, 10, 7)
 
         axes.scatter(10.**actual, 10.**predict, marker =  '.', alpha = .4)
         
@@ -158,7 +158,6 @@ h_test = test.H
 h_valid = valid.H
 
 # predict the Henry's constants
-
 best_model = train_model(train[all_des], test[all_des], k_train, k_test)
 
 k_train_predict = pd.Series(best_model.predict(train[all_des]), index = k_train.index)
@@ -349,3 +348,8 @@ h_test_together.to_csv('TSVs/{}.tsv'.format('H_test'), sep = '\t', index = False
 
 h_valid_together = valid[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_valid_predict, columns = ['H_valid']))
 h_valid_together.to_csv('TSVs/{}.tsv'.format('H_valid'), sep = '\t', index = False)
+
+# save feature importances
+feat_import = best_model.feature_importances_
+feat = pd.DataFrame(data = {'feature': all_des, 'feature importance': feat_import})
+feat.to_csv('TSVs/feature_importance.csv', index = False)
