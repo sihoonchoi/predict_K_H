@@ -2518,3 +2518,55 @@ Nodes:
 atl1-1-01-016-9-r.pace.gatech.edu
 End PBS Epilogue Mon Feb 22 11:39:42 EST 2021
 ---------------------------------------
+---------------------------------------
+Begin PBS Prologue Mon Feb 22 17:45:18 EST 2021
+Job ID:     6619273.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Mon Feb 22 17:45:18 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of K prediction for the training set: 0.9895273338404778
+r2 of K prediction for the test set: 0.8291888189046369
+r2 of K prediction for the validation set: 0.8292117736663928
+
+Training on H prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  7.0min finished
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of H prediction for the training set: 0.9867061519000332
+r2 of H prediction for the test set: 0.8272028657612194
+r2 of H prediction for the validation set: 0.8244524889953286
+
+Training Set
+MAE: 1.6927095566214476
+Max: 22.69781975350022
+
+Test Set
+MAE: 4.065802088615362
+Max: 216.86799763308474
+
+Validation Set
+MAE: 5.610664685252552
+Max: 213.31710499463176
+
+---------------------------------------
+Begin PBS Epilogue Mon Feb 22 18:19:47 EST 2021
+Job ID:     6619273.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=01:02:11,vmem=5339180kb,walltime=00:34:29,mem=590652kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-013-6-l.pace.gatech.edu
+End PBS Epilogue Mon Feb 22 18:19:47 EST 2021
+---------------------------------------

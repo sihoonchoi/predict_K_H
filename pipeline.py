@@ -299,6 +299,16 @@ for pair in azeo_pairs_valid:
 tsv_373.close()
 
 # r2 on molecule
+## training set
+tsv_mol = open('TSVs/r2_train.tsv', 'w')
+tsv_mol.write('molecule\tr2\n')
+
+for mol in molecules_train_test:
+    parity_plot(k_train.loc[train.molecule == mol], k_train_predict.loc[train.molecule == mol], title = '{}'.format(mol), dirname = 'figures/train/molecules', compare = 'K')
+    tsv_mol.write('{}\t{}\n'.format(mol, r2_score(k_train.loc[train.molecule == mol], k_train_predict.loc[train.molecule == mol])))
+
+tsv_mol.close()
+
 ## test set
 tsv_mol = open('TSVs/r2_test.tsv', 'w')
 tsv_mol.write('molecule\tr2\n')
