@@ -2778,3 +2778,273 @@ Nodes:
 atl1-1-01-015-16-l.pace.gatech.edu
 End PBS Epilogue Wed Feb 24 00:36:22 EST 2021
 ---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 24 10:43:21 EST 2021
+Job ID:     6622051.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 24 10:43:21 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 418, in _process_worker
+    r = call_item()
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 272, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 608, in __call__
+    return self.func(*args, **kwargs)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 256, in __call__
+    for func, args, kwargs in self.items]
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 256, in <listcomp>
+    for func, args, kwargs in self.items]
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_validation.py", line 544, in _fit_and_score
+    test_scores = _score(estimator, X_test, y_test, scorer)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_validation.py", line 591, in _score
+    scores = scorer(estimator, X_test, y_test)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/metrics/_scorer.py", line 87, in __call__
+    *args, **kwargs)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/metrics/_scorer.py", line 212, in _score
+    **self._kwargs)
+  File "pipeline.py", line 104, in r2_score_tilt
+    true_index = true.join(predict).applymap(lambda x: x > 1e-15).all(axis = 1)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/pandas/core/generic.py", line 5274, in __getattr__
+    return object.__getattribute__(self, name)
+AttributeError: 'Series' object has no attribute 'join'
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "pipeline.py", line 173, in <module>
+    best_model = train_model(train[all_des], test[all_des], k_train, k_test)
+  File "pipeline.py", line 117, in train_model
+    gcv.fit(X_train_shuffle, y_train_shuffle)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_search.py", line 710, in fit
+    self._run_search(evaluate_candidates)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_search.py", line 1151, in _run_search
+    evaluate_candidates(ParameterGrid(self.param_grid))
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_search.py", line 689, in evaluate_candidates
+    cv.split(X, y, groups)))
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 1017, in __call__
+    self.retrieve()
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 909, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 562, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/concurrent/futures/_base.py", line 435, in result
+    return self.__get_result()
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+AttributeError: 'Series' object has no attribute 'join'
+---------------------------------------
+Begin PBS Epilogue Wed Feb 24 10:50:20 EST 2021
+Job ID:     6622051.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=00:20:46,vmem=4775388kb,walltime=00:06:59,mem=568280kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-013-15-l.pace.gatech.edu
+End PBS Epilogue Wed Feb 24 10:50:20 EST 2021
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 24 11:11:28 EST 2021
+Job ID:     6622066.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 24 11:11:28 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+joblib.externals.loky.process_executor._RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 418, in _process_worker
+    r = call_item()
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/externals/loky/process_executor.py", line 272, in __call__
+    return self.fn(*self.args, **self.kwargs)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 608, in __call__
+    return self.func(*args, **kwargs)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 256, in __call__
+    for func, args, kwargs in self.items]
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 256, in <listcomp>
+    for func, args, kwargs in self.items]
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_validation.py", line 544, in _fit_and_score
+    test_scores = _score(estimator, X_test, y_test, scorer)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_validation.py", line 591, in _score
+    scores = scorer(estimator, X_test, y_test)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/metrics/_scorer.py", line 87, in __call__
+    *args, **kwargs)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/metrics/_scorer.py", line 212, in _score
+    **self._kwargs)
+  File "pipeline.py", line 104, in r2_score_tilt
+    true_index = pd.concat([true, predict], axis = 1).applymap(lambda x: x > 1e-15).all(axis = 1)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/pandas/core/reshape/concat.py", line 281, in concat
+    sort=sort,
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/pandas/core/reshape/concat.py", line 357, in __init__
+    raise TypeError(msg)
+TypeError: cannot concatenate object of type '<class 'numpy.ndarray'>'; only Series and DataFrame objs are valid
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "pipeline.py", line 173, in <module>
+    best_model = train_model(train[all_des], test[all_des], k_train, k_test)
+  File "pipeline.py", line 117, in train_model
+    gcv.fit(X_train_shuffle, y_train_shuffle)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_search.py", line 710, in fit
+    self._run_search(evaluate_candidates)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_search.py", line 1151, in _run_search
+    evaluate_candidates(ParameterGrid(self.param_grid))
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/model_selection/_search.py", line 689, in evaluate_candidates
+    cv.split(X, y, groups)))
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 1017, in __call__
+    self.retrieve()
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/parallel.py", line 909, in retrieve
+    self._output.extend(job.get(timeout=self.timeout))
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/joblib/_parallel_backends.py", line 562, in wrap_future_result
+    return future.result(timeout=timeout)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/concurrent/futures/_base.py", line 435, in result
+    return self.__get_result()
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/concurrent/futures/_base.py", line 384, in __get_result
+    raise self._exception
+TypeError: cannot concatenate object of type '<class 'numpy.ndarray'>'; only Series and DataFrame objs are valid
+---------------------------------------
+Begin PBS Epilogue Wed Feb 24 11:18:44 EST 2021
+Job ID:     6622066.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=00:21:35,vmem=4776072kb,walltime=00:07:16,mem=568572kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-017-25-r.pace.gatech.edu
+End PBS Epilogue Wed Feb 24 11:18:44 EST 2021
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 24 11:52:02 EST 2021
+Job ID:     6622134.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 24 11:52:02 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of K prediction for the training set: 0.9895273338404778
+r2 of K prediction for the test set: 0.8331831575483678
+r2 of K prediction for the validation set: 0.8304573680794008
+
+Training on H prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  7.2min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  7.3min finished
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of H prediction for the training set: 0.9867061519000332
+r2 of H prediction for the test set: 0.827481218124382
+r2 of H prediction for the validation set: 0.8254646335885102
+
+Training Set
+MAE: 1.6927095566214483
+Max: 22.697819753500223
+
+Test Set
+MAE: 4.066041767372891
+Max: 216.86799763308466
+
+Validation Set
+MAE: 5.557790483582837
+Max: 213.06899635143412
+
+Traceback (most recent call last):
+  File "pipeline.py", line 321, in <module>
+    tsv_mol.write('{}\t{}\n'.format(mol, r2_score_tilt(k_train.loc[train.molecule == mol], k_train_predict.loc[train.molecule == mol])))
+  File "pipeline.py", line 107, in r2_score_tilt
+    return r2_score(true.loc[true_index], predict.loc[true_index])
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/metrics/_regression.py", line 577, in r2_score
+    y_true, y_pred, multioutput)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/metrics/_regression.py", line 85, in _check_reg_targets
+    y_true = check_array(y_true, ensure_2d=False, dtype=dtype)
+  File "/usr/local/pace-apps/manual/packages/anaconda3/2020.02/lib/python3.7/site-packages/sklearn/utils/validation.py", line 586, in check_array
+    context))
+ValueError: Found array with 0 sample(s) (shape=(0,)) while a minimum of 1 is required.
+---------------------------------------
+Begin PBS Epilogue Wed Feb 24 12:27:48 EST 2021
+Job ID:     6622134.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=01:04:28,vmem=5339736kb,walltime=00:35:46,mem=591096kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-017-13-l.pace.gatech.edu
+End PBS Epilogue Wed Feb 24 12:27:48 EST 2021
+---------------------------------------
+---------------------------------------
+Begin PBS Prologue Wed Feb 24 12:39:57 EST 2021
+Job ID:     6622237.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Wed Feb 24 12:39:57 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of K prediction for the training set: 0.9895273338404778
+r2 of K prediction for the test set: 0.8302487664180112
+r2 of K prediction for the validation set: 0.8311831277667133
+
+Training on H prediction
+
+Fitting 3 folds for each of 1 candidates, totalling 3 fits
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  6.9min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done   3 out of   3 | elapsed:  7.0min finished
+Optimal hyperparameters: {'loss': 'ls', 'n_estimators': 5000}
+r2 of H prediction for the training set: 0.9867061519000332
+r2 of H prediction for the test set: 0.8253618848457523
+r2 of H prediction for the validation set: 0.8257104542382768
+
+Training Set
+MAE: 1.6927095566214472
+Max: 22.69781975350022
+
+Test Set
+MAE: 4.092205211226065
+Max: 216.86799763308468
+
+Validation Set
+MAE: 5.572822046553076
+Max: 213.16730998098006
+
+---------------------------------------
+Begin PBS Epilogue Wed Feb 24 13:14:38 EST 2021
+Job ID:     6622237.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=01:02:28,vmem=5340128kb,walltime=00:34:41,mem=591560kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-017-37-r.pace.gatech.edu
+End PBS Epilogue Wed Feb 24 13:14:38 EST 2021
+---------------------------------------

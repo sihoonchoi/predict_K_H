@@ -11,7 +11,7 @@ from sklearn.ensemble import GradientBoostingRegressor
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import r2_score, mean_absolute_error, max_error
+from sklearn.metrics import make_scorer, r2_score, mean_absolute_error, max_error
 from sklearn.utils import shuffle
 from scipy.stats import spearmanr
 
@@ -26,6 +26,9 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
 
         space = np.array([1e-62, 1e12])
         ticks = np.logspace(-60, 10, 7)
+
+        axes.plot([1e-15, 1e-15], space, '--k', linewidth = .5)
+        axes.plot(space, [1e-15, 1e-15], '--k', linewidth = .5)
 
         axes.scatter(10.**actual, 10.**predict, marker =  '.', alpha = .4)
         
@@ -97,17 +100,28 @@ def get_selectivity(mol1, mol2, X, actual, predict):
 
         return selectivity
 
+def r2_score_tilt(true, predict):
+    true = pd.Series(true)
+    predict = pd.Series(predict)
+    true_index = pd.concat([true, predict], axis = 1).applymap(lambda x: x > -15).all(axis = 1)
+    return r2_score(true.loc[true_index], predict.loc[true_index])
+
 def train_model(X_train, X_test, y_train, y_test, compare = 'K'):
     print('Training on {} prediction\n'.format(compare))
     
     model = GradientBoostingRegressor(max_depth = 3, learning_rate = 0.1)
     param_grid = {'n_estimators': np.array([5000]), 'loss': ['ls']}
+    
+    if compare == 'K':
+        scorer = make_scorer(r2_score_tilt)
+        gcv = GridSearchCV(model, param_grid, cv = 3, n_jobs = -1, scoring = scorer, verbose = 1)
+    elif compare == 'H':
+        gcv = GridSearchCV(model, param_grid, cv = 3, n_jobs = -1, verbose = 1)
 
     X_train_shuffle, y_train_shuffle = shuffle(X_train, y_train)
-    gcv = GridSearchCV(model, param_grid, cv = 3, n_jobs = -1, verbose = 1)
     gcv.fit(X_train_shuffle, y_train_shuffle)
     best_model = gcv.best_estimator_
-        
+    
     print('Optimal hyperparameters: {}'.format(gcv.best_params_))
     print('r2 of {} prediction for the training set: {}'.format(compare, best_model.score(X_train, y_train)))
     print('r2 of {} prediction for the test set: {}'.format(compare, best_model.score(X_test, y_test)))
@@ -125,7 +139,7 @@ figure = 'figures'
 if not os.path.isdir(figure):
     os.makedirs(figure)
 
-# make a directory to save CSVs
+# make a directory to save TSVs
 TSV = 'TSVs'
 if not os.path.isdir(TSV):
     os.makedirs(TSV)
@@ -307,7 +321,7 @@ tsv_mol.write('molecule\tr2\n')
 
 for mol in molecules_train_test:
     parity_plot(k_train.loc[train.molecule == mol], k_train_predict.loc[train.molecule == mol], title = '{}'.format(mol), dirname = 'figures/train/molecules', compare = 'K')
-    tsv_mol.write('{}\t{}\n'.format(mol, r2_score(k_train.loc[train.molecule == mol], k_train_predict.loc[train.molecule == mol])))
+    tsv_mol.write('{}\t{}\n'.format(mol, r2_score_tilt(k_train.loc[train.molecule == mol], k_train_predict.loc[train.molecule == mol])))
 
 tsv_mol.close()
 
@@ -317,7 +331,7 @@ tsv_mol.write('molecule\tr2\n')
 
 for mol in molecules_train_test:
     parity_plot(k_test.loc[test.molecule == mol], k_test_predict.loc[test.molecule == mol], title = '{}'.format(mol), dirname = 'figures/test/molecules', compare = 'K')
-    tsv_mol.write('{}\t{}\n'.format(mol, r2_score(k_test.loc[test.molecule == mol], k_test_predict.loc[test.molecule == mol])))
+    tsv_mol.write('{}\t{}\n'.format(mol, r2_score_tilt(k_test.loc[test.molecule == mol], k_test_predict.loc[test.molecule == mol])))
 
 tsv_mol.close()
 
@@ -327,7 +341,7 @@ tsv_mol.write('molecule\tr2\n')
 
 for mol in molecules_valid:
     parity_plot(k_valid.loc[valid.molecule == mol], k_valid_predict.loc[valid.molecule == mol], title = '{}'.format(mol), dirname = 'figures/validation/molecules', compare = 'K')
-    tsv_mol.write('{}\t{}\n'.format(mol, r2_score(k_valid.loc[valid.molecule == mol], k_valid_predict.loc[valid.molecule == mol])))
+    tsv_mol.write('{}\t{}\n'.format(mol, r2_score_tilt(k_valid.loc[valid.molecule == mol], k_valid_predict.loc[valid.molecule == mol])))
 
 tsv_mol.close()
 
