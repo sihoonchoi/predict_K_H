@@ -47,8 +47,8 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
         space = np.array([1e-10, 1e10])
         ticks = np.logspace(-10, 10, 5)
 
-        axes.plot([1, 1], space, '-k')
-        axes.plot(space, [1, 1], '-k')
+        axes.plot([1, 1], space, '--k', linewidth = .5)
+        axes.plot(space, [1, 1], '--k', linewidth = .5)
 
         axes.scatter(10.**actual, 10.**predict, marker = '.', alpha = .4)
 
