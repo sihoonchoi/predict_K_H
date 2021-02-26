@@ -109,8 +109,8 @@ def r2_score_tilt(true, predict):
 def train_model(X_train, X_test, y_train, y_test, compare = 'K'):
     print('Training on {} prediction\n'.format(compare))
     
-    model = GradientBoostingRegressor(max_depth = 3, learning_rate = 0.1)
-    param_grid = {'n_estimators': np.array([5000]), 'loss': ['ls']}
+    model = GradientBoostingRegressor(learning_rate = 0.1)
+    param_grid = {'n_estimators': np.array([1000, 5000, 10000]), 'max_depth': np.array([3, 4, 5]), 'loss': ['ls', 'huber']}
     
     if compare == 'K':
         scorer = make_scorer(r2_score_tilt)
