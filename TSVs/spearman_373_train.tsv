@@ -1,11 +1,11 @@
 mol1	mol2	spearman
-propene	propane	0.821239937861884
-acetonitrile	isopropyl alcohol	0.9280089562894135
-propyl alcohol	methyl propyl ketone	0.94421107296385
-dimethylamine	acetaldehyde	0.9482042715666388
-acetaldehyde	ethylamine	0.8966126124987059
-1,5-heptadiene	propionitrile	0.966130620282245
-dimethylamine	ethylamine	0.9167154356016343
-methyl propyl ether	2-pentene	0.592356113756892
-neopentane	methyl isopropyl ether	0.933045956193098
-4-methyl-1-hexene	4,4-dimethyl-1-pentene	0.8775335594453757
+propene	propane	0.7921202440722868
+acetonitrile	isopropyl alcohol	0.9881729385931701
+propyl alcohol	methyl propyl ketone	0.9915876633680505
+dimethylamine	acetaldehyde	0.9890560991130734
+acetaldehyde	ethylamine	0.9825557366931682
+1,5-heptadiene	propionitrile	0.9962152366547281
+dimethylamine	ethylamine	0.9671926855946227
+methyl propyl ether	2-pentene	0.8091851433630458
+neopentane	methyl isopropyl ether	0.9884988770557126
+4-methyl-1-hexene	4,4-dimethyl-1-pentene	0.9634613335412525

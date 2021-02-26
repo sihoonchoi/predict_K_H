@@ -24,8 +24,8 @@ def parity_plot(actual, predict, title, dirname = 'figures', compare = 'K'):
         ylabel = 'ML predicted $K_H$ [mol/kg/Pa]'
         scale = 'log'
 
-        space = np.array([1e-62, 1e12])
-        ticks = np.logspace(-60, 10, 7)
+        space = np.array([1e-22, 1e12])
+        ticks = np.logspace(-20, 10, 7)
 
         axes.plot([1e-15, 1e-15], space, '--k', linewidth = .5)
         axes.plot(space, [1e-15, 1e-15], '--k', linewidth = .5)
@@ -109,8 +109,8 @@ def r2_score_tilt(true, predict):
 def train_model(X_train, X_test, y_train, y_test, compare = 'K'):
     print('Training on {} prediction\n'.format(compare))
     
-    model = GradientBoostingRegressor(learning_rate = 0.1)
-    param_grid = {'n_estimators': np.array([1000, 5000, 10000]), 'max_depth': np.array([3, 4, 5]), 'loss': ['ls', 'huber']}
+    model = GradientBoostingRegressor(learning_rate = 0.1, loss = 'ls')
+    param_grid = {'n_estimators': np.array([1000, 5000, 10000]), 'max_depth': np.array([3, 4, 5])}
     
     if compare == 'K':
         scorer = make_scorer(r2_score_tilt)

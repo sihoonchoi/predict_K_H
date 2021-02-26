@@ -52,3 +52,55 @@ Nodes:
 atl1-1-01-017-29-r.pace.gatech.edu
 End PBS Epilogue Fri Feb 26 00:54:31 EST 2021
 ---------------------------------------
+---------------------------------------
+Begin PBS Prologue Fri Feb 26 09:08:06 EST 2021
+Job ID:     6623886.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Fri Feb 26 09:08:06 EST 2021
+---------------------------------------
+Training on K prediction
+
+Fitting 3 folds for each of 9 candidates, totalling 27 fits
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9965102435391253
+r2 of K prediction for the test set: 0.8673912209049615
+r2 of K prediction for the validation set: 0.8401427486763102
+
+Training on H prediction
+
+Fitting 3 folds for each of 9 candidates, totalling 27 fits
+[Parallel(n_jobs=-1)]: Done  27 out of  27 | elapsed: 44.6min finished
+[Parallel(n_jobs=-1)]: Using backend LokyBackend with 8 concurrent workers.
+[Parallel(n_jobs=-1)]: Done  27 out of  27 | elapsed: 49.1min finished
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 10000}
+r2 of H prediction for the training set: 0.99999995511222
+r2 of H prediction for the test set: 0.8909430974433687
+r2 of H prediction for the validation set: 0.8281563872315042
+
+Training Set
+MAE: 0.003284743382901047
+Max: 0.022449746990361064
+
+Test Set
+MAE: 3.3607189766170777
+Max: 184.51513606577475
+
+Validation Set
+MAE: 5.515313946561559
+Max: 210.85560276355142
+
+---------------------------------------
+Begin PBS Epilogue Fri Feb 26 11:18:58 EST 2021
+Job ID:     6623886.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=09:21:56,vmem=6049388kb,walltime=02:10:52,mem=1044280kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-013-27-r.pace.gatech.edu
+End PBS Epilogue Fri Feb 26 11:18:58 EST 2021
+---------------------------------------
