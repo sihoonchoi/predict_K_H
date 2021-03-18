@@ -1,0 +1,226 @@
+---------------------------------------
+Begin PBS Prologue Thu Mar 18 10:27:16 EDT 2021
+Job ID:     6653856.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Thu Mar 18 10:27:16 EDT 2021
+---------------------------------------
+Split #1
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 4, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9847125414239172
+r2 of K prediction for the test set: 0.8532833334737162
+
+MAPE of K prediction for the training set: 0.5127721542110433
+MAPE of K prediction for the test set: 0.7429308933578399
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9948503914083329
+r2 of H prediction for the test set: 0.8848276223320539
+
+MAE of H prediction for the training set: 1.1188524055329285
+MAE of H prediction for the test set: 3.6959710168621145
+
+Split #2
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 3, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9427135939189337
+r2 of K prediction for the test set: 0.852317366928309
+
+MAPE of K prediction for the training set: 0.9148666430160759
+MAPE of K prediction for the test set: 0.9203779997545604
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9947930073214302
+r2 of H prediction for the test set: 0.8946728982420354
+
+MAE of H prediction for the training set: 1.1181377603588905
+MAE of H prediction for the test set: 3.5591791642609967
+
+Split #3
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9966008518138302
+r2 of K prediction for the test set: 0.8821302713101735
+
+MAPE of K prediction for the training set: 0.28446558301451236
+MAPE of K prediction for the test set: 0.6238670309110808
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9949048671730103
+r2 of H prediction for the test set: 0.9048208176768137
+
+MAE of H prediction for the training set: 1.107138386452567
+MAE of H prediction for the test set: 3.542123041794581
+
+Split #4
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 3, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9399779434171464
+r2 of K prediction for the test set: 0.8714883856826015
+
+MAPE of K prediction for the training set: 0.922492709990326
+MAPE of K prediction for the test set: 0.7202463885818559
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9947080803562481
+r2 of H prediction for the test set: 0.9051860249712564
+
+MAE of H prediction for the training set: 1.1218863165779873
+MAE of H prediction for the test set: 3.535214574552625
+
+Split #5
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9964230723059624
+r2 of K prediction for the test set: 0.8708054594949053
+
+MAPE of K prediction for the training set: 0.2718640333147914
+MAPE of K prediction for the test set: 0.6775107767542727
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9947899755344624
+r2 of H prediction for the test set: 0.8671426791180333
+
+MAE of H prediction for the training set: 1.0983915953815457
+MAE of H prediction for the test set: 3.6537799999288842
+
+Split #6
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 3, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9406766545191385
+r2 of K prediction for the test set: 0.8375010866230892
+
+MAPE of K prediction for the training set: 0.9195080271290635
+MAPE of K prediction for the test set: 0.9494770334135483
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9950683413895519
+r2 of H prediction for the test set: 0.8580701595347957
+
+MAE of H prediction for the training set: 1.0764270179522049
+MAE of H prediction for the test set: 3.7187246633982514
+
+Split #7
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 3, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9395041829348575
+r2 of K prediction for the test set: 0.8368410976345891
+
+MAPE of K prediction for the training set: 0.7717376998841264
+MAPE of K prediction for the test set: 1.3791362929111184
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.994760266526877
+r2 of H prediction for the test set: 0.8562032619358746
+
+MAE of H prediction for the training set: 1.120616359295454
+MAE of H prediction for the test set: 3.7374639625616752
+
+Split #8
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 3, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.942724716756006
+r2 of K prediction for the test set: 0.8349012408984275
+
+MAPE of K prediction for the training set: 0.8160541567411305
+MAPE of K prediction for the test set: 1.088768593250241
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9950423194387319
+r2 of H prediction for the test set: 0.8593895570964865
+
+MAE of H prediction for the training set: 1.0783480401674834
+MAE of H prediction for the test set: 3.7703362552874085
+
+Split #9
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 4, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9849745617730308
+r2 of K prediction for the test set: 0.8740798013285106
+
+MAPE of K prediction for the training set: 0.5472887114322356
+MAPE of K prediction for the test set: 0.8438773513931583
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9946153515208209
+r2 of H prediction for the test set: 0.8808211863568278
+
+MAE of H prediction for the training set: 1.1251907280643598
+MAE of H prediction for the test set: 3.747635160374866
+
+Split #10
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 3, 'n_estimators': 1000}
+r2 of K prediction for the training set: 0.9440218010787315
+r2 of K prediction for the test set: 0.8466906657551898
+
+MAPE of K prediction for the training set: 0.9002575578107804
+MAPE of K prediction for the test set: 0.9370783535500646
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 1000}
+r2 of H prediction for the training set: 0.9946676491832979
+r2 of H prediction for the test set: 0.8957830723003611
+
+MAE of H prediction for the training set: 1.1445985747307572
+MAE of H prediction for the test set: 3.6925134178811745
+
+r2 of K prediction for the validation set: 0.8400849495920654
+MAPE of K prediction for the validation set: 2.7172704778170553
+
+r2 of H prediction for the validation set: 0.8319880287327994
+MAE of H prediction for the validation set: 5.398097531542471
+
+---------------------------------------
+Begin PBS Epilogue Thu Mar 18 12:35:41 EDT 2021
+Job ID:     6653856.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=24:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=03:27:11,vmem=6103632kb,walltime=02:08:26,mem=755072kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-016-15-l.pace.gatech.edu
+End PBS Epilogue Thu Mar 18 12:35:41 EDT 2021
+---------------------------------------

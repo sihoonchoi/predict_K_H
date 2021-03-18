@@ -162,18 +162,6 @@ if not os.path.isdir(TSV):
 # read in the train/test set
 train_test = pd.read_csv(sys.argv[1])
 
-train_index = train_test.Set == 'train'
-test_index = train_test.Set == 'test'
-
-train = train_test.loc[train_index]
-test = train_test.loc[test_index]
-
-k_train = np.log10(train.K)
-k_test = np.log10(test.K)
-
-h_train = train.H
-h_test = test.H
-
 # read in the validation set
 valid = pd.read_csv(sys.argv[2])
 k_valid = np.log10(valid.K)
@@ -211,7 +199,15 @@ for i, seed in enumerate(random_seed):
     if not os.path.isdir(TSV_dir):
         os.makedirs(TSV_dir)
 
-    tr_train, tr_test = train_test_split(train, test_size = .2, stratify = train.molecule, random_state = seed)
+    train, test = train_test_split(train_test, test_size = .2, stratify = train_test.molecule, random_state = seed)
+
+    k_train = np.log10(train.K)
+    k_test = np.log10(test.K)
+
+    h_train = train.H
+    h_test = test.H
+
+    tr_train, tr_test = train_test_split(train, test_size = .2, stratify = train.molecule, random_state = 42 - seed)
 
     test_fold = np.zeros(train.shape[0])
     for i in tr_train.index:
@@ -298,6 +294,7 @@ for i, seed in enumerate(random_seed):
     ensemble_H_valid.append(h_valid_predict_values)
 
 # average on the test set
+'''
 ensemble_K = np.array(ensemble_K_test)
 k_test_predict_avg = np.mean(ensemble_K, axis = 0)
 k_test_predict = test[['MOF', 'molecule', 'K']].join(pd.DataFrame(ensemble_K.T, columns = np.arange(1, len(random_seed) + 1, 1), index = k_test.index))
@@ -340,6 +337,7 @@ print('r2 of H prediction for the test set: {}'.format(r2_score(h_test, h_test_p
 print('MAE of H prediction for the test set: {}\n'.format(mean_absolute_error(h_test, h_test_predict_avg)))
 parity_plot(h_test, h_test_predict_avg, title = 'Test Set', compare = 'H')
 h_test_predict.to_csv('{}/{}.tsv'.format(TSV, 'H_test'), sep = '\t', index = False)
+'''
 
 # average on the validation set
 ensemble_K = np.array(ensemble_K_valid)
