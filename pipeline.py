@@ -109,14 +109,20 @@ def r2_score_tilt(true, predict):
     true = pd.Series(true)
     predict = pd.Series(predict)
     true_index = pd.concat([true, predict], axis = 1).applymap(lambda x: x > -15).all(axis = 1)
-    return r2_score(true.loc[true_index], predict.loc[true_index])
+    if true.loc[true_index].shape[0] > 0:
+        return r2_score(true.loc[true_index], predict.loc[true_index])
+    else:
+        return float('nan')
 
 def mape(true, predict):
     true = pd.Series(true)
     predict = pd.Series(predict)
-    #true_index = pd.concat([true, predict], axis = 1).applymap(lambda x: x > -15).all(axis = 1)
-    #return np.mean(np.abs((true.loc[true_index] - predict.loc[true_index]) / true.loc[true_index]))
-    return np.mean(np.abs((true - predict) / true))
+    true_index = pd.concat([true, predict], axis = 1).applymap(lambda x: x > -15).all(axis = 1)
+    if true.loc[true_index].shape[0] > 0:
+        return np.mean(np.abs((true.loc[true_index] - predict.loc[true_index]) / true.loc[true_index]))
+    else:
+        return float('nan')
+    #return np.mean(np.abs((true - predict) / true))
 
 def objective(true, predict):
     grad = np.tanh(predict - true)
@@ -220,8 +226,8 @@ for i, seed in enumerate(random_seed):
     k_train_predict = pd.Series(best_model_K.predict(train[all_des].values), index = k_train.index)
     k_test_predict = pd.Series(best_model_K.predict(test[all_des].values), index = k_test.index)
 
-    print('r2 of K prediction for the training set: {}'.format(best_model_K.score(train[all_des].values, k_train)))
-    print('r2 of K prediction for the test set: {}\n'.format(best_model_K.score(test[all_des].values, k_test)))
+    print('r2 of K prediction for the training set: {}'.format(r2_score_tilt(k_train, k_train_predict)))
+    print('r2 of K prediction for the test set: {}\n'.format(r2_score_tilt(k_test, k_test_predict)))
 
     print('MAPE of K prediction for the training set: {}'.format(mape(k_train, k_train_predict)))
     print('MAPE of K prediction for the test set: {}\n'.format(mape(k_test, k_test_predict)))
@@ -232,8 +238,8 @@ for i, seed in enumerate(random_seed):
     k_train_csv = train[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_train_predict, columns = ['predict']))
     k_train_csv.to_csv('{}/{}.tsv'.format(TSV_dir, 'K_training'), sep = '\t', index = False)
 
-    #k_test_csv = tr_test[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_tr_test_predict, columns = ['predict']))
-    #k_test_csv.to_csv('{}/{}.tsv'.format(TSV_dir, 'K_test'), sep = '\t', index = False)
+    k_test_csv = test[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_test_predict, columns = ['predict']))
+    k_test_csv.to_csv('{}/{}.tsv'.format(TSV_dir, 'K_test'), sep = '\t', index = False)
 
     # predict the heats of adsorption
     best_model_H = train_model(train, test_fold, compare = 'H')
@@ -241,8 +247,8 @@ for i, seed in enumerate(random_seed):
     h_train_predict = pd.Series(best_model_H.predict(train[all_des].values), index = h_train.index)
     h_test_predict = pd.Series(best_model_H.predict(test[all_des].values), index = h_test.index)
 
-    print('r2 of H prediction for the training set: {}'.format(best_model_H.score(train[all_des].values, h_train)))
-    print('r2 of H prediction for the test set: {}\n'.format(best_model_H.score(test[all_des].values, h_test)))
+    print('r2 of H prediction for the training set: {}'.format(r2_score_tilt(h_train, h_train_predict)))
+    print('r2 of H prediction for the test set: {}\n'.format(r2_score_tilt(h_test, h_test_predict)))
 
     print('MAE of H prediction for the training set: {}'.format(mean_absolute_error(h_train, h_train_predict)))
     print('MAE of H prediction for the test set: {}\n'.format(mean_absolute_error(h_test, h_test_predict)))
@@ -253,8 +259,8 @@ for i, seed in enumerate(random_seed):
     h_train_csv = train[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_train_predict, columns = ['predict']))
     h_train_csv.to_csv('{}/{}.tsv'.format(TSV_dir, 'H_training'), sep = '\t', index = False)
 
-    #h_test_csv = tr_test[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_tr_test_predict, columns = ['predict']))
-    #h_test_csv.to_csv('{}/{}.tsv'.format(TSV_dir, 'H_test'), sep = '\t', index = False)
+    h_test_csv = test[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_test_predict, columns = ['predict']))
+    h_test_csv.to_csv('{}/{}.tsv'.format(TSV_dir, 'H_test'), sep = '\t', index = False)
 
     k_test_predict_values = k_test_predict.values
     h_test_predict_values = h_test_predict.values
@@ -262,27 +268,27 @@ for i, seed in enumerate(random_seed):
     ensemble_K_test.append(k_test_predict_values)
     ensemble_H_test.append(h_test_predict_values)
 
-    split_mol = open('{}/r2_test_molecule.tsv'.format(TSV_dir), 'w')
-    split_mol.write('molecule\tr2\n')
+    split_mol = open('{}/metrics_test_molecule.tsv'.format(TSV_dir), 'w')
+    split_mol.write('molecule\tr2\tspearman\tMAPE\n')
 
     for mol in molecules_train_test:
         mol_test = k_test.loc[test.molecule == mol]
         mol_predict = k_test_predict.loc[test.molecule == mol]
         parity_plot(mol_test, mol_predict, title = '{}'.format(mol), dirname = '{}/test/molecule'.format(figure_dir))
-        split_mol.write('{}\t{}\n'.format(mol, r2_score(mol_test, mol_predict)))
+        split_mol.write('{}\t{}\t{}\t{}\n'.format(mol, r2_score_tilt(mol_test, mol_predict), spearmanr(mol_test, mol_predict)[0], mape(mol_test, mol_predict)))
 
     split_mol.close()
 
-    split_mof = open('{}/r2_test_mof.tsv'.format(TSV_dir), 'w')
-    split_mof.write('MOF\tr2\n')
+    split_mof = open('{}/metrics_test_mof.tsv'.format(TSV_dir), 'w')
+    split_mof.write('MOF\tr2\tspearman\tMAPE\n')
 
     for mof in mofs:
         mof_test = k_test.loc[test.MOF == mof]
         mof_predict = k_test_predict.loc[test.MOF == mof]
 
         if mof_test.shape[0] > 0:
-        	parity_plot(mof_test, mof_predict, title = '{}'.format(mof), dirname = '{}/test/MOF'.format(figure_dir))
-        	split_mof.write('{}\t{}\n'.format(mof, r2_score(mof_test, mof_predict)))
+            parity_plot(mof_test, mof_predict, title = '{}'.format(mof), dirname = '{}/test/MOF'.format(figure_dir))
+            split_mof.write('{}\t{}\t{}\t{}\n'.format(mof, r2_score_tilt(mof_test, mof_predict), spearmanr(mof_test, mof_predict)[0], mape(mof_test, mof_predict)))
 
     split_mof.close()
 
@@ -345,17 +351,20 @@ k_valid_predict_avg = np.mean(ensemble_K, axis = 0)
 k_valid_predict = valid[['MOF', 'molecule', 'K']].join(pd.DataFrame(ensemble_K.T, columns = np.arange(1, len(random_seed) + 1, 1), index = k_valid.index))
 k_valid_predict['average'] = k_valid_predict_avg
 k_valid_predict['predict'] = 10.**k_valid_predict_avg
-print('r2 of K prediction for the validation set: {}'.format(r2_score(k_valid, k_valid_predict_avg)))
+print('r2 of K prediction for the validation set: {}'.format(r2_score_tilt(k_valid, k_valid_predict_avg)))
 print('MAPE of K prediction for the validation set: {}\n'.format(mape(k_valid, k_valid_predict_avg)))
 parity_plot(k_valid, k_valid_predict_avg, title = 'Validation Set')
 k_valid_predict.to_csv('{}/{}.tsv'.format(TSV, 'K_validation'), sep = '\t', index = False)
 
 tsv_mol = open('TSVs/r2_validation.tsv', 'w')
-tsv_mol.write('molecule\tr2\n')
+tsv_mol.write('molecule\tr2\tspearman\tMAPE\n')
 
 for mol in molecules_valid:
     parity_plot(k_valid.loc[valid.molecule == mol], k_valid_predict['average'].loc[valid.molecule == mol], title = '{}'.format(mol), dirname = 'figures/validation/molecules', compare = 'K')
-    tsv_mol.write('{}\t{}\n'.format(mol, r2_score_tilt(k_valid.loc[valid.molecule == mol], k_valid_predict['average'].loc[valid.molecule == mol])))
+    r2 = r2_score_tilt(k_valid.loc[valid.molecule == mol], k_valid_predict['average'].loc[valid.molecule == mol])
+    S = spearmanr(k_valid.loc[valid.molecule == mol], k_valid_predict['average'].loc[valid.molecule == mol])[0]
+    MAPE = mape(k_valid.loc[valid.molecule == mol], k_valid_predict['average'].loc[valid.molecule == mol])
+    tsv_mol.write('{}\t{}\t{}\t{}\n'.format(mol, r2, S, MAPE))
 
 tsv_mol.close()
 
@@ -363,7 +372,7 @@ ensemble_H = np.array(ensemble_H_valid)
 h_valid_predict_avg = np.mean(ensemble_H, axis = 0)
 h_valid_predict = valid[['MOF', 'molecule', 'H']].join(pd.DataFrame(ensemble_H.T, columns = np.arange(1, len(random_seed) + 1, 1), index = h_valid.index))
 h_valid_predict['average'] = h_valid_predict_avg
-print('r2 of H prediction for the validation set: {}'.format(r2_score(h_valid, h_valid_predict_avg)))
+print('r2 of H prediction for the validation set: {}'.format(r2_score_tilt(h_valid, h_valid_predict_avg)))
 print('MAE of H prediction for the validation set: {}\n'.format(mean_absolute_error(h_valid, h_valid_predict_avg)))
 parity_plot(h_valid, h_valid_predict_avg, title = 'Validation Set', compare = 'H')
 h_valid_predict.to_csv('{}/{}.tsv'.format(TSV, 'H_validation'), sep = '\t', index = False)
