@@ -187,7 +187,7 @@ mol = train_test.columns[101:137]
 all_des = train_test.columns[2:137]
 
 # ensemble modeling
-random_seed = np.arange(1, 20, 2)
+random_seed = np.arange(1, 11, 1)
 #random_seed = [1]
 
 ensemble_K_test = []
@@ -215,7 +215,7 @@ for i, seed in enumerate(random_seed):
     h_train = train.H
     h_test = test.H
 
-    tr_train, tr_test = train_test_split(train, test_size = .2, stratify = train.molecule, random_state = 42 - seed)
+    tr_train, tr_test = train_test_split(train, test_size = .2, stratify = train.molecule, random_state = seed)
 
     test_fold = np.zeros(train.shape[0])
     for i in tr_train.index:

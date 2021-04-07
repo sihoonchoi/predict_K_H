@@ -1,226 +1,226 @@
 ---------------------------------------
-Begin PBS Prologue Tue Mar 23 10:43:13 EDT 2021
-Job ID:     6667042.sched-hive.pace.gatech.edu
+Begin PBS Prologue Tue Apr  6 11:33:27 EDT 2021
+Job ID:     6702532.sched-hive.pace.gatech.edu
 User ID:    schoi420
 Job name:   train-model
 Queue:      hive
-End PBS Prologue Tue Mar 23 10:43:13 EDT 2021
+End PBS Prologue Tue Apr  6 11:33:27 EDT 2021
 ---------------------------------------
 Split #1
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999878010397882
-r2 of log(K) prediction for the test set: 0.9282945027406057
+r2 of log(K) prediction for the training set: 0.9999853941266448
+r2 of log(K) prediction for the test set: 0.9013786046916334
 
-MAE of log(K) prediction for the training set: 0.007530347090071223
-MAE of log(K) prediction for the test set: 0.4818777480249081
+MAE of log(K) prediction for the training set: 0.008099024091369821
+MAE of log(K) prediction for the test set: 0.6090622139427957
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999807225202395
-r2 of H prediction for the test set: 0.9231342759694652
+r2 of H prediction for the training set: 0.9999794373950575
+r2 of H prediction for the test set: 0.9121800103053875
 
-MAE of H prediction for the training set: 0.06296738503065005
-MAE of H prediction for the test set: 3.4653004999826105
+MAE of H prediction for the training set: 0.06556208376255213
+MAE of H prediction for the test set: 4.123477967187514
 
 Split #2
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999884455754502
-r2 of log(K) prediction for the test set: 0.9254355894252801
+r2 of log(K) prediction for the training set: 0.9999860891347311
+r2 of log(K) prediction for the test set: 0.9123541636621422
 
-MAE of log(K) prediction for the training set: 0.007382638696379189
-MAE of log(K) prediction for the test set: 0.4725945780864132
+MAE of log(K) prediction for the training set: 0.008069045088386668
+MAE of log(K) prediction for the test set: 0.5671359760040026
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999820510869682
-r2 of H prediction for the test set: 0.9201653067487886
+r2 of H prediction for the training set: 0.9999803915632496
+r2 of H prediction for the test set: 0.9161172663555821
 
-MAE of H prediction for the training set: 0.06100512970159645
-MAE of H prediction for the test set: 3.389964233918432
+MAE of H prediction for the training set: 0.06429666176880568
+MAE of H prediction for the test set: 4.008905524492726
 
 Split #3
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999879137367341
-r2 of log(K) prediction for the test set: 0.9185075485345142
+r2 of log(K) prediction for the training set: 0.9999857860659773
+r2 of log(K) prediction for the test set: 0.9251773326021215
 
-MAE of log(K) prediction for the training set: 0.007470581746320028
-MAE of log(K) prediction for the test set: 0.4772382006118922
+MAE of log(K) prediction for the training set: 0.008077979204510267
+MAE of log(K) prediction for the test set: 0.5302091912266653
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999818756534208
-r2 of H prediction for the test set: 0.9147376866272995
+r2 of H prediction for the training set: 0.9999796051264307
+r2 of H prediction for the test set: 0.9150934155449488
 
-MAE of H prediction for the training set: 0.061586334100391056
-MAE of H prediction for the test set: 3.364193993550833
+MAE of H prediction for the training set: 0.0656212818483266
+MAE of H prediction for the test set: 3.797331115308478
 
 Split #4
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.999987456049834
-r2 of log(K) prediction for the test set: 0.9259767050593865
+r2 of log(K) prediction for the training set: 0.9999848539822063
+r2 of log(K) prediction for the test set: 0.9163032708631014
 
-MAE of log(K) prediction for the training set: 0.007746570716798559
-MAE of log(K) prediction for the test set: 0.46724384971642496
+MAE of log(K) prediction for the training set: 0.008201467218072366
+MAE of log(K) prediction for the test set: 0.59433561906145
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999808641015209
-r2 of H prediction for the test set: 0.9192704023754934
+r2 of H prediction for the training set: 0.9999798356086242
+r2 of H prediction for the test set: 0.9161098710249171
 
-MAE of H prediction for the training set: 0.06305394034806669
-MAE of H prediction for the test set: 3.298174192422322
+MAE of H prediction for the training set: 0.06509596858891831
+MAE of H prediction for the test set: 4.0279127711325495
 
 Split #5
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999887830429666
-r2 of log(K) prediction for the test set: 0.9211008268000271
+r2 of log(K) prediction for the training set: 0.9999854000026036
+r2 of log(K) prediction for the test set: 0.8932912104280699
 
-MAE of log(K) prediction for the training set: 0.007244203674989501
-MAE of log(K) prediction for the test set: 0.5101381670473221
+MAE of log(K) prediction for the training set: 0.008145364077567049
+MAE of log(K) prediction for the test set: 0.5881459783045435
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999827478886368
-r2 of H prediction for the test set: 0.9237492495179571
+r2 of H prediction for the training set: 0.9999799666627225
+r2 of H prediction for the test set: 0.9036557359137654
 
-MAE of H prediction for the training set: 0.059302591157165595
-MAE of H prediction for the test set: 3.4931595383987215
+MAE of H prediction for the training set: 0.06513092722010562
+MAE of H prediction for the test set: 4.139413793173741
 
 Split #6
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999885281767513
-r2 of log(K) prediction for the test set: 0.9268333196907941
+r2 of log(K) prediction for the training set: 0.9999859061259679
+r2 of log(K) prediction for the test set: 0.9206053379300039
 
-MAE of log(K) prediction for the training set: 0.007390691082118265
-MAE of log(K) prediction for the test set: 0.5050954217992774
+MAE of log(K) prediction for the training set: 0.00804014816524385
+MAE of log(K) prediction for the test set: 0.5541449254617711
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999830595874637
-r2 of H prediction for the test set: 0.9148182514696149
+r2 of H prediction for the training set: 0.9999790167675472
+r2 of H prediction for the test set: 0.9241154342430103
 
-MAE of H prediction for the training set: 0.05920047653774931
-MAE of H prediction for the test set: 3.531456420034834
+MAE of H prediction for the training set: 0.06637388542289073
+MAE of H prediction for the test set: 3.814052608154172
 
 Split #7
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999885024929003
-r2 of log(K) prediction for the test set: 0.9298010994240737
+r2 of log(K) prediction for the training set: 0.9999859066016519
+r2 of log(K) prediction for the test set: 0.8963242448458171
 
-MAE of log(K) prediction for the training set: 0.007387002370682138
-MAE of log(K) prediction for the test set: 0.510524559117768
+MAE of log(K) prediction for the training set: 0.008092053071840277
+MAE of log(K) prediction for the test set: 0.6041224851378634
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999833987899251
-r2 of H prediction for the test set: 0.9255280129641117
+r2 of H prediction for the training set: 0.99997903696124
+r2 of H prediction for the test set: 0.897047784294247
 
-MAE of H prediction for the training set: 0.0588205975252483
-MAE of H prediction for the test set: 3.507119273280793
+MAE of H prediction for the training set: 0.0654933923097306
+MAE of H prediction for the test set: 4.085814736727454
 
 Split #8
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999871168659802
-r2 of log(K) prediction for the test set: 0.9206162820132613
+r2 of log(K) prediction for the training set: 0.9999857062996967
+r2 of log(K) prediction for the test set: 0.9056270192336693
 
-MAE of log(K) prediction for the training set: 0.007776428372172091
-MAE of log(K) prediction for the test set: 0.5016384232496416
+MAE of log(K) prediction for the training set: 0.00804515602377682
+MAE of log(K) prediction for the test set: 0.5782205188742379
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.999983619493207
-r2 of H prediction for the test set: 0.9172618918786449
+r2 of H prediction for the training set: 0.9999806490787118
+r2 of H prediction for the test set: 0.9127670712148197
 
-MAE of H prediction for the training set: 0.05852317306294277
-MAE of H prediction for the test set: 3.5786347827824043
+MAE of H prediction for the training set: 0.06367534814303334
+MAE of H prediction for the test set: 3.979003826228447
 
 Split #9
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999892035242413
-r2 of log(K) prediction for the test set: 0.9107977428549239
+r2 of log(K) prediction for the training set: 0.9999872515085675
+r2 of log(K) prediction for the test set: 0.9245280256563037
 
-MAE of log(K) prediction for the training set: 0.007150696461301915
-MAE of log(K) prediction for the test set: 0.5050870044363059
+MAE of log(K) prediction for the training set: 0.007716977023740755
+MAE of log(K) prediction for the test set: 0.5969456556224785
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999815278855322
-r2 of H prediction for the test set: 0.9071917612552021
+r2 of H prediction for the training set: 0.9999802856620054
+r2 of H prediction for the test set: 0.9289321246040684
 
-MAE of H prediction for the training set: 0.062200522839490326
-MAE of H prediction for the test set: 3.547576802622083
+MAE of H prediction for the training set: 0.0635852478356912
+MAE of H prediction for the test set: 4.067941861175539
 
 Split #10
 
 Training on K prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of log(K) prediction for the training set: 0.9999886729301415
-r2 of log(K) prediction for the test set: 0.9001860034474838
+r2 of log(K) prediction for the training set: 0.9999872307991787
+r2 of log(K) prediction for the test set: 0.900650544972921
 
-MAE of log(K) prediction for the training set: 0.007391324219427585
-MAE of log(K) prediction for the test set: 0.5070038368571195
+MAE of log(K) prediction for the training set: 0.007778125025953828
+MAE of log(K) prediction for the test set: 0.6004947629833213
 
 Training on H prediction
 
 Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 5000}
-r2 of H prediction for the training set: 0.9999819224489099
-r2 of H prediction for the test set: 0.9167340957620618
+r2 of H prediction for the training set: 0.9999785801055247
+r2 of H prediction for the test set: 0.9071970923194872
 
-MAE of H prediction for the training set: 0.061744067646143735
-MAE of H prediction for the test set: 3.4754548908671126
+MAE of H prediction for the training set: 0.06733207830048862
+MAE of H prediction for the test set: 4.087583109803251
 
-r2 of K prediction for the validation set: 0.8384622470321179
-MAE of log(K) prediction for the validation set: 0.9147556879422883
+r2 of K prediction for the validation set: 0.815279775459573
+MAE of log(K) prediction for the validation set: 1.050381614155381
 
-r2 of H prediction for the validation set: 0.8568441517050278
-MAE of H prediction for the validation set: 5.356672650417683
+r2 of H prediction for the validation set: 0.8491933815025355
+MAE of H prediction for the validation set: 5.975844461752563
 
 ---------------------------------------
-Begin PBS Epilogue Tue Mar 23 21:04:30 EDT 2021
-Job ID:     6667042.sched-hive.pace.gatech.edu
+Begin PBS Epilogue Tue Apr  6 22:09:56 EDT 2021
+Job ID:     6702532.sched-hive.pace.gatech.edu
 User ID:    schoi420
 Job name:   train-model
 Resources:  nodes=1:ppn=8,walltime=24:00:00,mem=32gb,neednodes=1:ppn=8
-Rsrc Used:  cput=19:14:00,vmem=6245548kb,walltime=10:21:17,mem=855676kb,energy_used=0
+Rsrc Used:  cput=19:47:03,vmem=6258364kb,walltime=10:36:29,mem=868040kb,energy_used=0
 Queue:      hive
 Nodes:     
-atl1-1-01-016-34-r.pace.gatech.edu
-End PBS Epilogue Tue Mar 23 21:04:30 EDT 2021
+atl1-1-01-017-16-l.pace.gatech.edu
+End PBS Epilogue Tue Apr  6 22:09:56 EDT 2021
 ---------------------------------------
