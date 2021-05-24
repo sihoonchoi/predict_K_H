@@ -211,7 +211,7 @@ azeo_pairs_train_test = [
     ('4-methyl-1-hexene', '4,4-dimethyl-1-pentene')
     ]
 
-tsv = open('TSVs/spearman_train.tsv', 'w')
+tsv = open('TSVs/spearman_300_train.tsv', 'w')
 tsv.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_train_test:
@@ -223,7 +223,7 @@ for pair in azeo_pairs_train_test:
 tsv.close()
 
 ## test set
-tsv = open('TSVs/spearman_test.tsv', 'w')
+tsv = open('TSVs/spearman_300_test.tsv', 'w')
 tsv.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_train_test:
@@ -241,7 +241,7 @@ azeo_pairs_valid = [
     ('propionaldehyde', 'propylamine')
     ]
 
-tsv = open('TSVs/spearman_valid.tsv', 'w')
+tsv = open('TSVs/spearman_300_valid.tsv', 'w')
 tsv.write('mol1\tmol2\tspearman\n')
 
 for pair in azeo_pairs_valid:
