@@ -107,31 +107,6 @@ def parity_plot(actual, predict, title, compare, dirname = 'figures'):
     plt.savefig('{}/{}_{}.png'.format(dirname, title, compare))
     plt.close()
 
-def get_selectivity(mol1, mol2, X, actual, predict):
-    mol1_mof = set(X[X.molecule == mol1].MOF)
-    mol2_mof = set(X[X.molecule == mol2].MOF)
-
-    common_mof = list(mol1_mof & mol2_mof)
-
-    if len(common_mof):
-        mol1_sim = []
-        mol2_sim = []
-        mol1_ML = []
-        mol2_ML = []
-
-        for mof in common_mof:
-            mol1_sim.append(actual[np.logical_and(X.molecule == mol1, X.MOF == mof)].values[0])
-            mol2_sim.append(actual[np.logical_and(X.molecule == mol2, X.MOF == mof)].values[0])
-            mol1_ML.append(predict[np.logical_and(X.molecule == mol1, X.MOF == mof)].values[0])
-            mol2_ML.append(predict[np.logical_and(X.molecule == mol2, X.MOF == mof)].values[0])
-
-        selectivity_sim = (np.array(mol1_sim) - np.array(mol2_sim)).reshape(-1,)
-        selectivity_ML = (np.array(mol1_ML) - np.array(mol2_ML)).reshape(-1,)
-
-        selectivity = pd.DataFrame({'MOF': common_mof, 'simulation': selectivity_sim, 'ML': selectivity_ML})
-
-        return selectivity
-
 def henry_at_diff_temp(k1, h, T1, T2):
     kB = 8.31446261815324
     k2 = k1 + h * 1000 / kB * (1 / T1 - 1 / T2)
@@ -220,10 +195,10 @@ for i, seed in enumerate(random_seed):
     parity_plot(k_valid, k_valid_predict, title = 'valid', compare = 'K', dirname = figure_split)
 
     k_train_csv = train[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_train_predict, columns = ['predict']))
-    k_train_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'K_train'), sep = '\t', index = False)
+    k_train_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'train_K'), sep = '\t', index = False)
 
     k_valid_csv = valid[['MOF', 'molecule', 'K']].join(pd.DataFrame(10.**k_valid_predict, columns = ['predict']))
-    k_valid_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'K_valid'), sep = '\t', index = False)
+    k_valid_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'valid_K'), sep = '\t', index = False)
 
     # predict H
     best_model_H = train_model(train, test_fold, compare = 'H')
@@ -241,10 +216,10 @@ for i, seed in enumerate(random_seed):
     parity_plot(h_valid, h_valid_predict, title = 'valid', compare = 'H', dirname = figure_split)
 
     h_train_csv = train[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_train_predict, columns = ['predict']))
-    h_train_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'H_train'), sep = '\t', index = False)
+    h_train_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'train_H'), sep = '\t', index = False)
 
     h_valid_csv = valid[['MOF', 'molecule', 'H']].join(pd.DataFrame(h_valid_predict, columns = ['predict']))
-    h_valid_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'H_valid'), sep = '\t', index = False)
+    h_valid_csv.to_csv('{}/{}.tsv'.format(TSV_split, 'valid_H'), sep = '\t', index = False)
 
     # gather metrics by molecules
     split_mol = open('{}/metrics_valid_molecule.tsv'.format(TSV_split), 'w')
@@ -296,13 +271,13 @@ k_test_predict['predict'] = 10.**k_test_predict_avg
 print('r2 of log(K) prediction for the test set: {}'.format(r2_score_tilt(k_test, k_test_predict_avg)))
 print('MAE of log(K) prediction for the test set: {}\n'.format(mean_absolute_error(k_test, k_test_predict_avg)))
 parity_plot(k_test, k_test_predict_avg, title = 'test', compare = 'K')
-k_test_predict.to_csv('{}/{}.tsv'.format(TSV, 'K_test'), sep = '\t', index = False)
+k_test_predict.to_csv('{}/{}.tsv'.format(TSV, 'test_K'), sep = '\t', index = False)
 
 tsv_mol = open('TSVs/metrics_test_mol.tsv', 'w')
 tsv_mol.write('molecule\tr2\tspearman\tMAE\n')
 
 for mol in molecules_test:
-    parity_plot(k_test.loc[test.molecule == mol], k_test_predict['average'].loc[test.molecule == mol], title = '{}'.format(mol), dirname = 'figures/test/molecules', compare = 'K')
+    parity_plot(k_test.loc[test.molecule == mol], k_test_predict['average'].loc[test.molecule == mol], title = '{}'.format(mol), dirname = 'figures/test/molecule', compare = 'K')
     r2 = r2_score_tilt(k_test.loc[test.molecule == mol], k_test_predict['average'].loc[test.molecule == mol])
     S = spearmanr(k_test.loc[test.molecule == mol], k_test_predict['average'].loc[test.molecule == mol])[0]
     MAE = mean_absolute_error(k_test.loc[test.molecule == mol], k_test_predict['average'].loc[test.molecule == mol])
@@ -318,8 +293,7 @@ h_test_predict['average'] = h_test_predict_avg
 print('r2 of H prediction for the test set: {}'.format(r2_score(h_test, h_test_predict_avg)))
 print('MAE of H prediction for the test set: {}\n'.format(mean_absolute_error(h_test, h_test_predict_avg)))
 parity_plot(h_test, h_test_predict_avg, title = 'test', compare = 'H')
-h_test_predict.to_csv('{}/{}.tsv'.format(TSV, 'H_test'), sep = '\t', index = False)
-
+h_test_predict.to_csv('{}/{}.tsv'.format(TSV, 'test_H'), sep = '\t', index = False)
 
 # near-azeotropic pairs
 ## training set
@@ -418,7 +392,7 @@ def figure3():
     axes = axes.ravel()
 
     for i in range(1, 5):
-        te = pd.read_csv('{}/{}/K_valid.tsv'.format(TSV, i), sep = '\t')
+        te = pd.read_csv('{}/{}/valid_K.tsv'.format(TSV, i), sep = '\t')
         GCMC = te.K
         ML = te.predict
         
@@ -468,7 +442,7 @@ def figure4():
         mol_1, mol_2 = pair
 
         for i in range(1, seed):
-            df = pd.read_csv('{}/{}/K_valid.tsv'.format(TSV, i), sep = '\t')
+            df = pd.read_csv('{}/{}/valid_K.tsv'.format(TSV, i), sep = '\t')
 
             mol_1_index = df[df.molecule == mol_1].set_index('MOF')[['K', 'predict']].applymap(lambda x: x > 1e-15).all(axis = 1).values
             df_1 = df[df.molecule == mol_1].loc[mol_1_index].set_index('MOF')[['K', 'predict']]
@@ -502,7 +476,7 @@ def figure5():
 
     ax.scatter(K, H, marker = '.', alpha = .4)
     ax.set_xlabel('log($K_H$)')
-    ax.set_ylabel('$\Delta$H')
+    ax.set_ylabel('$\Delta H_{ads}$ [kJ/mol]')
 
     plt.tight_layout()
     plt.savefig('{}/figure5.png'.format(figure))
@@ -532,8 +506,8 @@ def figure6():
         mol_1, mol_2 = pair
 
         for i in range(1, seed):
-            K = pd.read_csv('{}/{}/K_valid.tsv'.format(TSV, i), sep = '\t')
-            H = pd.read_csv('{}/{}/H_valid.tsv'.format(TSV, i), sep = '\t')
+            K = pd.read_csv('{}/{}/valid_K.tsv'.format(TSV, i), sep = '\t')
+            H = pd.read_csv('{}/{}/valid_H.tsv'.format(TSV, i), sep = '\t')
 
             mol_1_index = K[K.molecule == mol_1].set_index('MOF')[['K', 'predict']].applymap(lambda x: x > 1e-15).all(axis = 1).values
             K_1 = K[K.molecule == mol_1].loc[mol_1_index].set_index('MOF')[['K', 'predict']]
@@ -593,7 +567,7 @@ def figureS1():
         mol_1, mol_2 = pair
 
         for i in range(1, seed):
-            df = pd.read_csv('{}/{}/K_valid.tsv'.format(TSV, i), sep = '\t')
+            df = pd.read_csv('{}/{}/valid_K.tsv'.format(TSV, i), sep = '\t')
 
             mol_1_index = df[df.molecule == mol_1].set_index('MOF')[['K', 'predict']].applymap(lambda x: x > 1e-15).all(axis = 1).values
             df_1 = df[df.molecule == mol_1].loc[mol_1_index].set_index('MOF')[['K', 'predict']]
@@ -645,8 +619,8 @@ def figureS2():
         mol_1, mol_2 = pair
 
         for i in range(1, seed):
-            K = pd.read_csv('{}/{}/K_valid.tsv'.format(TSV, i), sep = '\t')
-            H = pd.read_csv('{}/{}/H_valid.tsv'.format(TSV, i), sep = '\t')
+            K = pd.read_csv('{}/{}/valid_K.tsv'.format(TSV, i), sep = '\t')
+            H = pd.read_csv('{}/{}/valid_H.tsv'.format(TSV, i), sep = '\t')
 
             mol_1_index = K[K.molecule == mol_1].set_index('MOF')[['K', 'predict']].applymap(lambda x: x > 1e-15).all(axis = 1).values
             K_1 = K[K.molecule == mol_1].loc[mol_1_index].set_index('MOF')[['K', 'predict']]
