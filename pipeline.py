@@ -19,8 +19,8 @@ def train_model(data, test_fold, compare):
 
     model = GradientBoostingRegressor(learning_rate = 0.1, loss = 'ls')
 
-    param_grid = {'n_estimators': [1000, 2000, 4000],
-    'max_depth': [3, 4, 5]}
+    param_grid = {'n_estimators': [4000],
+    'max_depth': [5]}
 
     ps = PredefinedSplit(test_fold)
     scorer = make_scorer(mean_absolute_error, greater_is_better = False)
@@ -326,7 +326,7 @@ for j, pair in enumerate(azeo_pairs_train_valid):
 
     selectivity = []
     for i in range(1, seed):
-        df = pd.read_csv('{}/{}/K_valid.tsv'.format(TSV, i), sep = '\t')
+        df = pd.read_csv('{}/{}/valid_K.tsv'.format(TSV, i), sep = '\t')
 
         mol_1_index = df[df.molecule == mol_1].set_index('MOF')[['K', 'predict']].applymap(lambda x: x > 1e-15).all(axis = 1).values
         df_1 = df[df.molecule == mol_1].loc[mol_1_index].set_index('MOF')[['K', 'predict']]
@@ -356,8 +356,8 @@ for j, pair in enumerate(azeo_pairs_train_valid):
 
     selectivity = []
     for i in range(1, seed):
-        K = pd.read_csv('{}/{}/K_valid.tsv'.format(TSV, i), sep = '\t')
-        H = pd.read_csv('{}/{}/H_valid.tsv'.format(TSV, i), sep = '\t')
+        K = pd.read_csv('{}/{}/valid_K.tsv'.format(TSV, i), sep = '\t')
+        H = pd.read_csv('{}/{}/valid_H.tsv'.format(TSV, i), sep = '\t')
 
         mol_1_index = K[K.molecule == mol_1].set_index('MOF')[['K', 'predict']].applymap(lambda x: x > 1e-15).all(axis = 1).values
         K_1 = K[K.molecule == mol_1].loc[mol_1_index].set_index('MOF')[['K', 'predict']]

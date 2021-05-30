@@ -1,0 +1,246 @@
+---------------------------------------
+Begin PBS Prologue Sat May 29 10:23:25 EDT 2021
+Job ID:     6766717.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Queue:      hive
+End PBS Prologue Sat May 29 10:23:26 EDT 2021
+---------------------------------------
+Split #1
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999560438868687
+r2 of log(K) prediction for the validation set: 0.9276870045184187
+
+MAE of log(K) prediction for the training set: 0.014261997278059917
+MAE of log(K) prediction for the validation set: 0.48396226674785636
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999449363936886
+r2 of H prediction for the validation set: 0.8921183379759737
+
+MAE of H prediction for the training set: 0.11738040348843415
+MAE of H prediction for the validation set: 3.4648541598285902
+
+Split #2
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999573103065257
+r2 of log(K) prediction for the validation set: 0.9114108724298517
+
+MAE of log(K) prediction for the training set: 0.014302753690973414
+MAE of log(K) prediction for the validation set: 0.4873369615807381
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999466933987652
+r2 of H prediction for the validation set: 0.8953115204750128
+
+MAE of H prediction for the training set: 0.11510512140034519
+MAE of H prediction for the validation set: 3.469013033212411
+
+Split #3
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999583457969351
+r2 of log(K) prediction for the validation set: 0.9243472305361796
+
+MAE of log(K) prediction for the training set: 0.013991237456095134
+MAE of log(K) prediction for the validation set: 0.47705153648959425
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999477515704942
+r2 of H prediction for the validation set: 0.8982105713193153
+
+MAE of H prediction for the training set: 0.11429377009885933
+MAE of H prediction for the validation set: 3.3891539350847153
+
+Split #4
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999579862972011
+r2 of log(K) prediction for the validation set: 0.9304318786724577
+
+MAE of log(K) prediction for the training set: 0.014104469760632257
+MAE of log(K) prediction for the validation set: 0.509024173128862
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999477091628103
+r2 of H prediction for the validation set: 0.8426784623856954
+
+MAE of H prediction for the training set: 0.11183210811637999
+MAE of H prediction for the validation set: 3.537626472870659
+
+Split #5
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999586079626384
+r2 of log(K) prediction for the validation set: 0.9223484682524594
+
+MAE of log(K) prediction for the training set: 0.013882978573336178
+MAE of log(K) prediction for the validation set: 0.47566907712065937
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999474683055485
+r2 of H prediction for the validation set: 0.9084588634909954
+
+MAE of H prediction for the training set: 0.11525143504977567
+MAE of H prediction for the validation set: 3.3580239461818877
+
+Split #6
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999584932487905
+r2 of log(K) prediction for the validation set: 0.9188504137012488
+
+MAE of log(K) prediction for the training set: 0.014020840691781267
+MAE of log(K) prediction for the validation set: 0.4751226789017985
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999496765524363
+r2 of H prediction for the validation set: 0.9143676556534769
+
+MAE of H prediction for the training set: 0.11175354800345666
+MAE of H prediction for the validation set: 3.3347482907833967
+
+Split #7
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.999955841951942
+r2 of log(K) prediction for the validation set: 0.9260415758730719
+
+MAE of log(K) prediction for the training set: 0.01457536578927687
+MAE of log(K) prediction for the validation set: 0.46745369265005465
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999451012013616
+r2 of H prediction for the validation set: 0.9078072569729656
+
+MAE of H prediction for the training set: 0.11714765368922538
+MAE of H prediction for the validation set: 3.300665178665021
+
+Split #8
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999576429073987
+r2 of log(K) prediction for the validation set: 0.9108015010947073
+
+MAE of log(K) prediction for the training set: 0.014074103253215056
+MAE of log(K) prediction for the validation set: 0.4959166365526069
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999509069260201
+r2 of H prediction for the validation set: 0.8886030414477282
+
+MAE of H prediction for the training set: 0.11126507011656346
+MAE of H prediction for the validation set: 3.453203046799675
+
+Split #9
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999599211718502
+r2 of log(K) prediction for the validation set: 0.9205571532124054
+
+MAE of log(K) prediction for the training set: 0.013735262025855928
+MAE of log(K) prediction for the validation set: 0.5139576658627235
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999488476069223
+r2 of H prediction for the validation set: 0.8637240754166118
+
+MAE of H prediction for the training set: 0.11052603958753057
+MAE of H prediction for the validation set: 3.4641362722041222
+
+Split #10
+
+Training on K prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of log(K) prediction for the training set: 0.9999605881451552
+r2 of log(K) prediction for the validation set: 0.908663354563062
+
+MAE of log(K) prediction for the training set: 0.013785600621646072
+MAE of log(K) prediction for the validation set: 0.48841210204709673
+
+Training on H prediction
+
+Optimal hyperparameters: {'max_depth': 5, 'n_estimators': 4000}
+
+r2 of H prediction for the training set: 0.9999507998020649
+r2 of H prediction for the validation set: 0.8948237812915427
+
+MAE of H prediction for the training set: 0.11125115549161119
+MAE of H prediction for the validation set: 3.3821158324918326
+
+r2 of log(K) prediction for the test set: 0.8381388002794987
+MAE of log(K) prediction for the test set: 0.9136515485235005
+
+r2 of H prediction for the test set: 0.8407224842437507
+MAE of H prediction for the test set: 5.246556090195187
+
+---------------------------------------
+Begin PBS Epilogue Sat May 29 18:38:57 EDT 2021
+Job ID:     6766717.sched-hive.pace.gatech.edu
+User ID:    schoi420
+Job name:   train-model
+Resources:  nodes=1:ppn=8,walltime=12:00:00,mem=32gb,neednodes=1:ppn=8
+Rsrc Used:  cput=08:16:18,vmem=5211720kb,walltime=08:15:32,mem=581720kb,energy_used=0
+Queue:      hive
+Nodes:     
+atl1-1-01-013-6-l.pace.gatech.edu
+End PBS Epilogue Sat May 29 18:38:57 EDT 2021
+---------------------------------------
