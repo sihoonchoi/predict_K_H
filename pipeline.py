@@ -13,6 +13,9 @@ from sklearn.metrics import make_scorer, r2_score, mean_absolute_error
 from sklearn.utils import shuffle
 from scipy.stats import spearmanr
 
+# plot settings
+plt.rcParams['mathtext.default'] = 'regular'
+
 # define functions
 def train_model(data, test_fold, compare):
     print('Training on {} prediction\n'.format(compare))
@@ -152,7 +155,7 @@ ensemble_K_test = []
 ensemble_H_test = []
 
 for i, seed in enumerate(random_seed):
-    print('Split #{}\n'.format(i + 1))
+    print('split #{}\n'.format(i + 1))
 
     # make subdirecotries
     figure_split = '{}/{}'.format(figure, i + 1)
@@ -412,7 +415,7 @@ def figure3():
         axes[i - 1].set_ylim([1e-60, 1e15])
         axes[i - 1].set_xticks(np.logspace(-55, 15, 8))
         axes[i - 1].set_yticks(np.logspace(-55, 15, 8))
-        axes[i - 1].set_title('Split #{}'.format(i))
+        axes[i - 1].set_title('split #{}'.format(i))
     
     plt.tight_layout()
     plt.savefig('{}/figure3.png'.format(figure))
@@ -464,9 +467,9 @@ def figure4():
         axes[j].text(1e-8, 1e15, text, fontsize = 'large')
 
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True)
+    lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figure4.png'.format(figure))
+    plt.savefig('{}/figure4.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
 
 def figure5():
     K = np.log10(train_valid.K)
@@ -537,9 +540,9 @@ def figure6():
         axes[j].text(1e-8, 1e15, text, fontsize = 'large')
 
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True)
+    lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figure6.png'.format(figure))
+    plt.savefig('{}/figure6.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
 
 def figureS1():
     fig, axes = plt.subplots(2, 5, figsize = (20, 8), dpi = 150)
@@ -589,9 +592,9 @@ def figureS1():
         axes[j].text(1e-8, 1e18, text, fontsize = 'large')
 
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles = handles, labels = labels, loc = 'lower center', ncol = 10, bbox_to_anchor = (0.5, -0.05), frameon = False)
+    lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figureS1.png'.format(figure))
+    plt.savefig('{}/figureS1.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
 
 def figureS2():
     fig, axes = plt.subplots(2, 5, figsize = (20, 8), dpi = 150)
@@ -650,9 +653,9 @@ def figureS2():
         axes[j].text(1e-8, 1e18, text, fontsize = 'large')
     
     handles, labels = axes[0].get_legend_handles_labels()
-    fig.legend(handles = handles, labels = labels, loc = 'lower center', ncol = 10, bbox_to_anchor = (0.5, -0.05), frameon = False)
+    lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figureS2.png'.format(figure))
+    plt.savefig('{}/figureS2.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
 
 figure3()
 figure4()
