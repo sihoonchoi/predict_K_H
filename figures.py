@@ -85,7 +85,7 @@ def figure4():
     handles, labels = axes[0].get_legend_handles_labels()
     lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figure4.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
+    plt.savefig('{}/figure4.png'.format(figure), bbox_extra_artists = (lgd,), bbox_inches = 'tight')
 
 def figure5():
     K = np.log10(train_valid.K)
@@ -158,7 +158,7 @@ def figure6():
     handles, labels = axes[0].get_legend_handles_labels()
     lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figure6.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
+    plt.savefig('{}/figure6.png'.format(figure), bbox_extra_artists = (lgd,), bbox_inches = 'tight')
 
 def figureS1():
     fig, axes = plt.subplots(2, 5, figsize = (20, 8), dpi = 150)
@@ -210,7 +210,7 @@ def figureS1():
     handles, labels = axes[0].get_legend_handles_labels()
     lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figureS1.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
+    plt.savefig('{}/figureS1.png'.format(figure), bbox_extra_artists = (lgd,), bbox_inches = 'tight')
 
 def figureS2():
     fig, axes = plt.subplots(2, 5, figsize = (20, 8), dpi = 150)
@@ -271,7 +271,7 @@ def figureS2():
     handles, labels = axes[0].get_legend_handles_labels()
     lgd = axes[0].legend(handles = handles, labels = labels, loc = 'center', ncol = 5, bbox_to_anchor = (0.5, -0.02), frameon = True, bbox_transform = fig.transFigure)
     plt.tight_layout()
-    plt.savefig('{}/figureS2.png'.format(figure), bbox_extra_artists = (ldg,), bbox_inches = 'tight')
+    plt.savefig('{}/figureS2.png'.format(figure), bbox_extra_artists = (lgd,), bbox_inches = 'tight')
 
 figure3()
 figure4()
