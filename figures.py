@@ -17,6 +17,10 @@ test = pd.read_csv(sys.argv[2])
 k_test = np.log10(test.K)
 h_test = test.H
 
+# subdirectories
+figure = 'figures'
+TSV = 'TSVs'
+
 # near-azeotropic pairs
 ## training set
 azeo_pairs_train_valid = [
