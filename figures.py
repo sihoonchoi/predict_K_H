@@ -21,6 +21,8 @@ h_test = test.H
 figure = 'figures'
 TSV = 'TSVs'
 
+seed = 11
+
 # near-azeotropic pairs
 ## training set
 azeo_pairs_train_valid = [
