@@ -45,6 +45,13 @@ azeo_pairs_test = [
     ('propionaldehyde', 'propylamine')
     ]
 
+# functions
+def henry_at_diff_temp(k1, h, T1, T2):
+    kB = 8.31446261815324
+    k2 = k1 + h * 1000 / kB * (1 / T1 - 1 / T2)
+
+    return k2
+
 # get figures
 def figure3():
     fig, axes = plt.subplots(1, 4, figsize = (16, 4), dpi = 300)
