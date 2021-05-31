@@ -5,6 +5,39 @@ import pylab as plt
 import warnings
 warnings.simplefilter('ignore')
 
+# plot settings
+plt.rcParams['mathtext.default'] = 'regular'
+
+# read in the train/validation set
+train_valid = pd.read_csv(sys.argv[1])
+
+# read in the test set
+test = pd.read_csv(sys.argv[2])
+k_test = np.log10(test.K)
+h_test = test.H
+
+# near-azeotropic pairs
+## training set
+azeo_pairs_train_valid = [
+    ('propionitrile', '1,5-heptadiene'),
+    ('methyl isopropyl ether', 'neopentane'),
+    ('propyl alcohol', 'methyl propyl ketone'),
+    ('acetonitrile', 'isopropyl alcohol'),
+    ('4-methyl-1-hexene', '4,4-dimethyl-1-pentene'),
+    ('acetaldehyde', 'ethylamine'),
+    ('acetaldehyde', 'dimethylamine'),
+    ('methyl propyl ether', '2-pentene'),
+    ('propene', 'propane'),
+    ('ethylamine', 'dimethylamine')
+    ]
+
+## test set
+azeo_pairs_test = [
+    ('1-methyl-3-buten-1-ol', '3-methyl-1-butanol'),
+    ('2-hexene', '1,5-hexadiene'),
+    ('propionaldehyde', 'propylamine')
+    ]
+
 # get figures
 def figure3():
     fig, axes = plt.subplots(1, 4, figsize = (16, 4), dpi = 300)
