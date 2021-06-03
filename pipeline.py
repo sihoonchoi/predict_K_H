@@ -76,8 +76,6 @@ for i, seed in enumerate(random_seed):
     # make subdirecotries
     data_split = '{}/{}'.format(data, i + 1)
 
-    if not os.path.isdir(figure_split):
-        os.makedirs(figure_split)
     if not os.path.isdir(data_split):
         os.makedirs(data_split)
 
