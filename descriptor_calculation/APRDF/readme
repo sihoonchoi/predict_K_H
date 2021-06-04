@@ -1,6 +1,0 @@
-MOFlist_final.txt lists 471 MOFs names for this calculation.
-Weighting_scheme.txt has the weights of each atom normalized based on Carbon of four weighting schemes: electronegativity, polarizability, vdWVolume and mass.
-In the Coor folder, it has the xyz coordinates of all the MOFs, together with a Master.txt, containing information about the cell parameters of each MOFs.
-Calculate_APRDF.py contains the code for calculating the AP-RDF descriptors for 471 MOFs.
-APRDF_descriptors.xlsx is the calculation results of three different B parameters: 1, 10, 100 using 0.25 Angstorm as an increament, stored in 3 sheets respectively.
-
