@@ -7,7 +7,7 @@ To run the ML model, type the following command on Terminal: `python pipeline.py
 This will create one subdirectory: `data`
 
 `data` directory consists of: 
-- Predicted results for the training and test sets in each data split (numbered directories correspond to the random seed used during the data split)
+- Predicted results for the training and test sets in each data split (numbered directories correspond to the random seeds used during the data split)
 - Predicted results for set 2
 
 In case of using our pipeline, please cite the article: **X. Yu, S. Choi, D. Tang, A. J. Medford, D. Sholl, Efficient Models For Predicting Temperature-dependent Henry’s Constants and Adsorption Selectivities for Diverse Collections of Molecules in Metal-Organic Frameworks (Submitted)**
