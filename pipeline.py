@@ -91,8 +91,8 @@ for i, seed in enumerate(random_seed):
     train, valid = train_test_split(train_valid, test_size = .2, stratify = train_valid.molecule, random_state = seed)
 
     test_fold = np.zeros(train_valid.shape[0])
-    for i in train.index:
-        a = train_valid.index.get_loc(i)
+    for j in train.index:
+        a = train_valid.index.get_loc(j)
         test_fold[a] = -1
 
     # predict K
