@@ -17,7 +17,7 @@ def train_model(data, test_fold, compare):
 
     model = GradientBoostingRegressor(learning_rate = 0.1, loss = 'ls')
 
-    param_grid = {'n_estimators': [1000, 2000, 4000],
+    param_grid = {'n_estimators': [1000, 5000],
     'max_depth': [3, 4, 5]}
 
     ps = PredefinedSplit(test_fold)
