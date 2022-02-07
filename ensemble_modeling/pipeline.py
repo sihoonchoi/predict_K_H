@@ -65,7 +65,7 @@ all_des = set_1.columns[2:137]
 
 # ensemble modeling on set 1
 seed = 11
-random_seed = np.arange(1, seed, 1)
+random_seed = np.arange(1, seed * 2 - 1, 2)
 
 ensemble_K = []
 ensemble_H = []
